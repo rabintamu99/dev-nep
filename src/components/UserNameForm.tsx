@@ -107,6 +107,36 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
           </div>
         </CardContent>
         <CardFooter>
+          <Button isLoading={isLoading}>Change username</Button>
+        </CardFooter>
+      </Card>
+      <Card>
+        <CardHeader>
+          <CardTitle>Your Name</CardTitle>
+          <CardDescription>
+            Please enter a Full name you are comfortable with.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className='relative grid gap-1'>
+            <div className='absolute top-0 left-0 w-8 h-10 grid place-items-center'>
+              <span className='text-sm text-zinc-400'>u/</span>
+            </div>
+            <Label className='sr-only' htmlFor='name'>
+              Name
+            </Label>
+            <Input
+              id='name'
+              className='w-[400px] pl-6'
+              size={32}
+              {...register('name')}
+            />
+            {errors?.name && (
+              <p className='px-1 text-xs text-red-600'>{errors.name.message}</p>
+            )}
+          </div>
+        </CardContent>
+        <CardFooter>
           <Button isLoading={isLoading}>Change name</Button>
         </CardFooter>
       </Card>

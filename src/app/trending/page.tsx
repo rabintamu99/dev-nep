@@ -17,13 +17,13 @@ export default async function Home() {
     <>
       {/* <h1 className='font-bold text-3xl md:text-4xl'>Your feed</h1> */}
       <Link  className={buttonVariants({ variant: 'ghost' })}
-          href={`/`}><HomeIcon className="mr-2 h-4 w-4" /> Feed           
+          href={`/`}><HomeIcon className="mr-3 h-4 w-4" /> Feed           
+       </Link>
+       <Link  className={buttonVariants({ variant: 'outline' })}
+          href={`/trending`}><TrendingUpIcon className="mr-3 h-4 w-4" /> Trending           
        </Link>
        <Link  className={buttonVariants({ variant: 'ghost' })}
-          href={`/trending`}><TrendingUpIcon className="mr-2 h-4 w-4" /> Trending           
-       </Link>
-       <Link  className={buttonVariants({ variant: 'ghost' })}
-          href={``}><MessageCircle className="mr-2 h-4 w-4" /> Discussion           
+          href={``}><MessageCircle className="mr-3 h-4 w-4" /> Discussion           
        </Link>
       <div className='grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 py-6'>
         {/* @ts-expect-error server component */}
