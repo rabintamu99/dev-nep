@@ -5,6 +5,7 @@ import Providers from '@/components/Providers'
 import { Toaster } from '@/components/ui/Toaster'
 import Footer from '@/components/footer'
 import '@/styles/globals.css'
+import { ThemeProvider } from "@/components/theme-provider"
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -29,6 +30,11 @@ export default function RootLayout({
       )}>
       <body className='min-h-screen pt-12 bg-slate-50 antialiased'>
         <Providers>
+          <ThemeProvider  
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange>
           {/* @ts-expect-error Server Component */}
           <Navbar />
           {authModal}
@@ -37,6 +43,7 @@ export default function RootLayout({
             {children}
           </div>
           <Footer />
+          </ThemeProvider>
         </Providers>
         <Toaster />
       </body>

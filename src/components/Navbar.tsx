@@ -7,30 +7,32 @@ import { buttonVariants } from './ui/Button'
 import { UserAccountNav } from './UserAccountNav'
 import SearchBar from './SearchBar'
 import { BaggageClaim, BellIcon, CalendarPlusIcon, DogIcon, HeartHandshakeIcon, MoonIcon } from 'lucide-react'
+import { ModeToggle } from './DarkModeToggle'
 
 const Navbar = async () => {
   const session = await getServerSession(authOptions)
   return (
     <div className='fixed top-0 inset-x-0 h-fit bg-zinc-100 border-b border-zinc-300 z-[10] py-2'>
-      <div className='container max-w-7xl h-full mx-auto flex items-center justify-between px-2'>
-        {/* logo */}
-        <Link href='/' className='flex gap-2 items-center'>
-          <Icons.logo className='h-8 w-8 sm:h-6 sm:w-6' />
-          <p className='hidden text-zinc-700 text-sm font-medium md:block'>DevNep</p>
-        </Link>
+    <div className='container max-w-7xl h-full mx-auto flex items-center justify-between gap-2'>
+      {/* logo */}
+      <Link href='/' className='flex gap-2 items-center'>
+        <Icons.logo className='h-8 w-8 sm:h-6 sm:w-6' />
+        <p className='hidden text-zinc-700 text-sm font-medium md:block'>DEV-NEP</p>
+      </Link>
 
-        <Link href='/' className='flex gap-2 items-center md:block'>
+
+        <Link href='/' className='flex gap-2 items-center'>
           <CalendarPlusIcon className='h-8 w-8 sm:h-6 sm:w-6' />
           <p className='hidden text-zinc-700 text-sm font-medium md:block'>Events</p>
         </Link>
-        <Link href='/' className='flex gap-2 items-center md:block'>
+        <Link href='/' className='flex gap-2 items-center'>
           <HeartHandshakeIcon className='h-8 w-8 sm:h-6 sm:w-6' />
           <p className='hidden text-zinc-700 text-sm font-medium md:block'>Jobs</p>
         </Link>
         {/* search bar */}
         <SearchBar />
-        <BellIcon className='flex gap-2 items-center md:block'/>
-        <MoonIcon className='flex gap-2 items-center md:block' />
+        <BellIcon className='flex gap-2 items-center'/>
+        <ModeToggle  />
         {/* actions */}
         {session?.user ? (
           <UserAccountNav user={session.user} />
