@@ -7,6 +7,7 @@ import { getAuthSession } from '@/lib/auth'
 import { HomeIcon, Mail, MessageCircle, MessageCircleIcon, Tent as TentIcon, TrendingUpIcon, UserIcon, Users2Icon } from 'lucide-react'
 import { Plus as PlusIcon } from 'lucide-react'
 import Link from 'next/link'
+import TrendFeed from './TrendFeed'
 
 export const dynamic = 'force-dynamic'
 export const fetchCache = 'force-no-store'
@@ -19,7 +20,7 @@ export default async function Home() {
       <Link  className={buttonVariants({ variant: 'ghost' })}
           href={`/`}><HomeIcon className="mr-2 h-4 w-4" /> Feed           
        </Link>
-       <Link  className={buttonVariants({ variant: 'ghost' })}
+       <Link  className={buttonVariants({ variant: 'outline' })}
           href={`/trend`}><TrendingUpIcon className="mr-2 h-4 w-4" /> Trending           
        </Link>
        <Link  className={buttonVariants({ variant: 'ghost' })}
@@ -27,14 +28,14 @@ export default async function Home() {
        </Link>
       <div className='grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 py-6'>
         {/* @ts-expect-error server component */}
-        {session ? <CustomFeed /> : <GeneralFeed />}
+        <TrendFeed />
 
         {/* subreddit info */}
         <div className='overflow-hidden h-fit rounded-lg order-first md:order-last'>
           <div className='bg-emerald-0 px-2 py-2'>
             <p className='font-semibold py-1 px-2 flex items-center gap-1.5'>
               <Users2Icon className='h-4 w-4' />
-              Your Communities
+              Trending Communities
             </p>
            
             {/* <MyCommunities /> */}
