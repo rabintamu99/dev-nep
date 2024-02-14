@@ -16,7 +16,8 @@ export default async function Home() {
   return (
     <>
       {/* <h1 className='font-bold text-3xl md:text-4xl'>Your feed</h1> */}
-      <Link  className={buttonVariants({ variant: 'ghost' })}
+   <div>
+   <Link  className={buttonVariants({ variant: 'ghost' })}
           href={`/`}><HomeIcon className="mr-2 h-4 w-4" /> Feed           
        </Link>
        <Link  className={buttonVariants({ variant: 'ghost' })}
@@ -25,7 +26,9 @@ export default async function Home() {
        <Link  className={buttonVariants({ variant: 'ghost' })}
           href={`/discussion`}><MessageCircle className="mr-2 h-4 w-4" /> Discussion           
        </Link>
+   </div>
       <div className='grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 py-6'>
+   
         {/* @ts-expect-error server component */}
         {session ? <CustomFeed /> : <GeneralFeed />}
 
@@ -36,8 +39,8 @@ export default async function Home() {
               <Users2Icon className='h-4 w-4' />
               Your Communities
             </p>
-           
-            {/* <MyCommunities /> */}
+           {/* @ts-expect-error server component */}
+            <MyCommunities />
           </div>
           <dl className='-my-3 divide-y divide-gray-100 px-1 py-4 text-sm leading-6'>
             <div className='flex justify-between gap-x-4 py-3'>
