@@ -5,7 +5,7 @@ import MyCommunities from '@/components/homepage/MyCommunities'
 import TopUser from '@/components/homepage/TopUsers'
 import { buttonVariants } from '@/components/ui/Button'
 import { getAuthSession } from '@/lib/auth'
-import { HomeIcon, Mail, MessageCircle, MessageCircleIcon, Tent as TentIcon, TrendingUpIcon, UserIcon, Users2Icon } from 'lucide-react'
+import { HomeIcon, Mail, MessageCircle, MessageCircleIcon, ShieldQuestion, Tent as TentIcon, TrendingUpIcon, UserIcon, Users2Icon } from 'lucide-react'
 import Link from 'next/link'
 
 export const dynamic = 'force-dynamic'
@@ -16,15 +16,23 @@ export default async function Home() {
   return (
     <>
       {/* <h1 className='font-bold text-3xl md:text-4xl'>Your feed</h1> */}
-      <Link  className={buttonVariants({ variant: 'ghost' })}
-          href={`/`}><HomeIcon className="mr-2 h-4 w-4" /> Feed           
-       </Link>
-       <Link  className={buttonVariants({ variant: 'outline' })}
-          href={`/trend`}><TrendingUpIcon className="mr-2 h-4 w-4" /> Trending           
-       </Link>
-       <Link  className={buttonVariants({ variant: 'ghost' })}
-          href={`/discussion`}><MessageCircle className="mr-2 h-4 w-4" /> Discussion           
-       </Link>
+      <div className='flex items-center gap-2'>
+      <Link className="bg-white text-gray-500 border  rounded-full flex items-center px-3 py-1 " href={`/`}>
+           <HomeIcon className="mr-2 h-4 w-4" />
+           <span>Feed</span>
+      </Link>
+      <Link className="bg-white text-black border border-gray-300 shadow-sm rounded-full flex items-center px-3 py-1 " href={`/trend`}>
+            <TrendingUpIcon className="mr-2 h-4 w-4" />
+           <span>Trend</span>
+      </Link>
+      <Link className="bg-white text-black border border-gray-300 shadow-sm rounded-full flex items-center px-3 py-1" href={`/`}>
+            <ShieldQuestion className="mr-2 h-4 w-4" />
+           <span>Ask</span>
+      </Link>
+    
+      </div>
+   
+     
       <div className='grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 py-6'>
        {/* @ts-expect-error server component */}
        {session ? <CustomFeed /> : <GeneralFeed />}
