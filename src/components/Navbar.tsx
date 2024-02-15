@@ -6,7 +6,7 @@ import { Icons } from './Icons'
 import { buttonVariants } from './ui/Button'
 import { UserAccountNav } from './UserAccountNav'
 import SearchBar from './SearchBar'
-import { BaggageClaim, BellIcon, CalendarPlusIcon, DogIcon, HeartHandshakeIcon, MoonIcon } from 'lucide-react'
+import { BellIcon, CalendarPlusIcon, DogIcon, HeartHandshakeIcon, MoonIcon } from 'lucide-react'
 
 const Navbar = async () => {
   const session = await getServerSession(authOptions)
@@ -16,29 +16,32 @@ const Navbar = async () => {
         {/* logo */}
         <Link href='/' className='flex gap-2 items-center'>
           <Icons.logo className='h-8 w-8 sm:h-6 sm:w-6' />
-          <p className='hidden text-zinc-700 text-sm font-medium md:block'>DevNep</p>
+          <p className=' text-zinc-700 text-md font-bold md:block'>NEP.DEV</p>
         </Link>
 
-        <Link href='/' className='flex gap-2 items-center md:block'>
-          <CalendarPlusIcon className='h-8 w-8 sm:h-6 sm:w-6' />
-          <p className='hidden text-zinc-700 text-sm font-medium md:block'>Events</p>
+      
+        <div className='flex items-center'>
+          <Link href='/event' className='flex mr-4 items-center'>
+          <p className='hidden hover:text-slate-950 text-zinc-700 text-md font-medium md:block'>Events</p>
         </Link>
-        <Link href='/' className='flex gap-2 items-center md:block'>
-          <HeartHandshakeIcon className='h-8 w-8 sm:h-6 sm:w-6' />
-          <p className='hidden text-zinc-700 text-sm font-medium md:block'>Jobs</p>
+        <Link href='/' className='flex gap-2 items-center'>
+          <p className='hidden text-zinc-700 text-md font-medium md:block'>Jobs</p>
         </Link>
+        </div>
         {/* search bar */}
         <SearchBar />
-        <BellIcon className='flex gap-2 items-center md:block'/>
-        <MoonIcon className='flex gap-2 items-center md:block' />
-        {/* actions */}
-        {session?.user ? (
+        <div className=' flex gap-2 items-center'>
+        <BellIcon className='flex hidden mr-4 items-center md:block'/>
+        <MoonIcon className='flex  hidden mr-4 items-center md:block' />
+           {/* actions */}
+           {session?.user ? (
           <UserAccountNav user={session.user} />
         ) : (
           <Link href='/sign-in' className={buttonVariants()}>
             Sign In
           </Link>
         )}
+        </div>
       </div>
     </div>
   )
