@@ -1,4 +1,4 @@
-'use server';
+
 import { db } from '@/lib/db'
 import Link from 'next/link'
 import { UserAvatar } from '@/components/UserAvatar'

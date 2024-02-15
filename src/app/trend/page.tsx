@@ -5,7 +5,6 @@ import TopUser from '@/components/homepage/TopUsers'
 import { buttonVariants } from '@/components/ui/Button'
 import { getAuthSession } from '@/lib/auth'
 import { HomeIcon, Mail, MessageCircle, MessageCircleIcon, Tent as TentIcon, TrendingUpIcon, UserIcon, Users2Icon } from 'lucide-react'
-import { Plus as PlusIcon } from 'lucide-react'
 import Link from 'next/link'
 import TrendFeed from './TrendFeed'
 
@@ -37,8 +36,8 @@ export default async function Home() {
               <Users2Icon className='h-4 w-4' />
               Trending Communities
             </p>
-           
-            {/* <MyCommunities /> */}
+           {/* @ts-expect-error server component */}
+            <MyCommunities />
           </div>
           <dl className='-my-3 divide-y divide-gray-100 px-1 py-4 text-sm leading-6'>
             <div className='flex justify-between gap-x-4 py-3'>
