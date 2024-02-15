@@ -44,7 +44,7 @@ export default async function Home() {
               Trending Communities
             </p>
           
-            {/* <MyCommunities /> */}
+            <MyCommunities />
           </div>
           <dl className='-my-3 divide-y divide-gray-100 px-1 py-4 text-sm leading-6'>
             <div className='flex justify-between gap-x-4 py-3'>
@@ -64,6 +64,7 @@ export default async function Home() {
               <UserIcon className='h-4 w-4' />
               Top Contributors
             </p>
+            <TopUser />
            
           </div>
           <dl className='-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6'>

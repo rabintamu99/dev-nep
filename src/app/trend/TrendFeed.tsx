@@ -6,7 +6,8 @@ import { db } from '@/lib/db'
 import { notFound } from 'next/navigation'
 import TrendPost from './TrendPost'
 
-const CustomFeed = async () => {
+
+const TrendFeed = async () => {
   const session = await getAuthSession()
 
   // only rendered if session exists, so this will not happen
@@ -46,4 +47,4 @@ const CustomFeed = async () => {
   return <TrendPost initialPosts={posts} />
 }
 
-export default CustomFeed
+export default TrendFeed
