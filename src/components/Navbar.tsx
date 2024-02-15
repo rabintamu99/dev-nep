@@ -21,7 +21,7 @@ const Navbar = async () => {
 
       
         <div className='flex items-center'>
-          <Link href='/' className='flex mr-4 items-center'>
+          <Link href='/event' className='flex mr-4 items-center'>
           <p className='hidden hover:text-slate-950 text-zinc-700 text-md font-medium md:block'>Events</p>
         </Link>
         <Link href='/' className='flex gap-2 items-center'>
