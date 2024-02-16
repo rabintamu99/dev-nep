@@ -6,6 +6,7 @@ import { Icons } from './Icons'
 import { buttonVariants } from './ui/Button'
 import { UserAccountNav } from './UserAccountNav'
 import SearchBar from './SearchBar'
+import { ModeToggle } from '@/components/ModeToggle'
 import { BellIcon, CalendarPlusIcon, DogIcon, HeartHandshakeIcon, MoonIcon } from 'lucide-react'
 
 const Navbar = async () => {
@@ -32,7 +33,7 @@ const Navbar = async () => {
         <SearchBar />
         <div className=' flex gap-2 items-center'>
         <BellIcon className='flex hidden mr-4 items-center md:block'/>
-        <MoonIcon className='flex  hidden mr-4 items-center md:block' />
+        <ModeToggle  />
            {/* actions */}
            {session?.user ? (
           <UserAccountNav user={session.user} />

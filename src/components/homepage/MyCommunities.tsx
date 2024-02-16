@@ -20,6 +20,7 @@ const CustomFeed = async () => {
       subreddit: true,
     },
   })
+  
   return (
     <div>
       <ul>
@@ -31,6 +32,7 @@ const CustomFeed = async () => {
                   className='h-4 w-4'
                 />
                 <span className='text-sm font-medium'>{community.subreddit.name}</span>
+              
               </p>
             </Link>
           </li>
