@@ -21,14 +21,14 @@ export default function RootLayout({
   authModal: React.ReactNode
 }) {
   return (
-    <html
+    <html suppressHydrationWarning
       lang='en'
       className={cn(
         'bg-white text-slate-900 antialiased light',
         inter.className
       )}>
         
-      <body className='min-h-screen pt-12 bg-slate-50 antialiased'>
+      <body className='min-h-screen  max-w-8xl pt-8 bg-slate-50 antialiased'>
       <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -40,8 +40,7 @@ export default function RootLayout({
           {/* @ts-expect-error Server Component */}
           <Navbar />
           {authModal}
-
-          <div className='container max-w-7xl mx-auto h-full pt-12'>
+          <div className='container max-w-8xl mx-auto h-full pt-12'>
             {children}
           </div>
           <Footer />

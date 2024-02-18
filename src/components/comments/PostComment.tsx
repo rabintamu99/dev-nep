@@ -6,7 +6,7 @@ import { CommentRequest } from '@/lib/validators/comment'
 import { Comment, CommentVote, User } from '@prisma/client'
 import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
-import { MessageSquare } from 'lucide-react'
+import { MessageCircleCodeIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { FC, useRef, useState } from 'react'
 import CommentVotes from '../CommentVotes'
@@ -103,7 +103,7 @@ const PostComment: FC<PostCommentProps> = ({
           }}
           variant='ghost'
           size='xs'>
-          <MessageSquare className='h-4 w-4 mr-1.5' />
+          <MessageCircleCodeIcon className='h-4 w-4 mr-1.5' />
           Reply
         </Button>
       </div>

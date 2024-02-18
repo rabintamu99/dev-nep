@@ -93,7 +93,7 @@ const PostVoteClient = ({
       </Button>
 
       {/* score */}
-      <p className='text-center py-2 font-medium text-sm text-zinc-900'>
+      <p className='text-center font-medium text-sm text-zinc-900'>
         {votesAmt}
       </p>
 
