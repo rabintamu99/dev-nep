@@ -1,7 +1,8 @@
 import { redirect } from 'next/navigation'
-
+import SidebarNav  from '@/components/setting/SidebarNav'
 import { UserNameForm } from '@/components/UserNameForm'
 import { authOptions, getAuthSession } from '@/lib/auth'
+
 
 export const metadata = {
   title: 'Settings',
@@ -16,7 +17,8 @@ export default async function SettingsPage() {
   }
 
   return (
-    <div className='max-w-4xl mx-auto py-12'>
+    <div className='max-w-4xl grid grid-cols-3 mx-auto py-12'>
+      <SidebarNav />
       <div className='grid items-start gap-8'>
         <h1 className='font-bold text-3xl md:text-4xl'>Settings</h1>
 

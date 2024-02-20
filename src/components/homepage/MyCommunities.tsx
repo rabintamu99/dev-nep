@@ -6,32 +6,28 @@ import Link from 'next/link'
 import { UsersIcon } from 'lucide-react'
 
 
-const CustomFeed = async () => {
-  const session = await getAuthSession()
+const Community = async () => {
+  // const session = await getAuthSession()
 
-  // only rendered if session exists, so this will not happen
-  if (!session) return notFound()
+  // // only rendered if session exists, so this will not happen
+  // if (!session) return notFound()
 
-  const followedCommunities = await db.subscription.findMany({
-    where: {
-      userId: session.user.id,
-    },
-    include: {
-      subreddit: true,
-    },
+  const subreddit = await db.subreddit.findMany({
+  
+ 
   })
   
   return (
     <div>
       <ul>
-         {followedCommunities.map((community) => (
-          <li key={community.subreddit.id} className='text-zinc-900 text-xl px-2 py-2 rounded-sm hover:bg-slate-100'>
-            <Link href={`/r/${community.subreddit.id}`}>
+         {subreddit.map((subreddit) => (
+          <li key={subreddit.id} className='text-zinc-900 text-xl px-2 py-2 rounded-sm hover:bg-slate-100'>
+            <Link href={`/r/${subreddit.id}`}>
               <p className='flex items-center gap-1.5'>
                 <UsersIcon
                   className='h-4 w-4'
                 />
-                <span className='text-sm font-medium'>{community.subreddit.name}</span>
+                <span className='text-sm font-medium'>{subreddit.name}</span>
               
               </p>
             </Link>
@@ -42,4 +38,4 @@ const CustomFeed = async () => {
   );
 }
 
-export default CustomFeed
+export default Community

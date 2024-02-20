@@ -21,12 +21,14 @@ export default function RootLayout({
   authModal: React.ReactNode
 }) {
   return (
-    <html suppressHydrationWarning
+    
+    <html
       lang='en'
       className={cn(
         'bg-white text-slate-900 antialiased light',
         inter.className
       )}>
+        
         
       <body className='min-h-screen  max-w-8xl pt-8 bg-slate-50 antialiased'>
       <ThemeProvider

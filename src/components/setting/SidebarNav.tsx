@@ -12,10 +12,10 @@ import {
   BellIcon,
   FileIcon,
   PlusSquareIcon,
-  TrendingUpIcon,
-  FileQuestionIcon,
+  LockIcon,
+  LucideLock,
 } from "lucide-react";
-import SidebarItem from "./item";
+import SidebarItem from "@/components/item";
 
 interface ISidebarItem {
   name: string;
@@ -31,34 +31,24 @@ interface ISubItem {
 
 const items: ISidebarItem[] = [
   {
-    name: "Home",
+    name: "Account",
     path: "/",
-    icon: HomeIcon,
+    icon: User2Icon,
   },
   {
-    name: "Trend",
-    path: "/trend",
-    icon: TrendingUpIcon,
-  },
-  {
-    name: "Ask",
-    path: "/ask",
-    icon: FileQuestionIcon,
-  },
-  {
-    name: "Events",
+    name: "Profile",
     path: "/event",
-    icon: CalendarCheck2Icon,
+    icon: UserCircle2Icon,
   },
   {
-    name: "Jobs",
+    name: "Security",
     path: "/job",
-    icon: PenBoxIcon,
+    icon: LockIcon,
   },
   {
-    name: "Create Community",
+    name: "Password",
     path: "/r/create",
-    icon: PlusSquareIcon,
+    icon: LucideLock,
   },
   {
     name: "Setting",
@@ -72,7 +62,7 @@ const items: ISidebarItem[] = [
   },
   {
     name: "Posts",
-    path: "/profile/post",
+    path: "/setting",
     icon: FileIcon,
   },
 

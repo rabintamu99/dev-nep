@@ -1,5 +1,5 @@
 
-import CustomFeed from '@/components/homepage/CustomFeed'
+import MyPost from '@/components/homepage/MyPost'
 import GeneralFeed from '@/components/homepage/GeneralFeed'
 import MyCommunities from '@/components/homepage/MyCommunities'
 import Sidebar from '@/components/Sidebar'
@@ -47,7 +47,7 @@ export default async function Home() {
       </Link>
       </div> */}
   {/* @ts-expect-error server component */}
-  {session ? <CustomFeed /> : <GeneralFeed />}
+  {session ? <MyPost /> : <GeneralFeed />}
      
     </div>
 

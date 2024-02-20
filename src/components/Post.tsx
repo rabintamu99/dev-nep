@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { FC, useRef } from 'react'
 import EditorOutput from './EditorOutput'
 import PostVoteClient from './post-vote/PostVoteClient'
+import { UserAvatar } from './UserAvatar'
 
 type PartialVote = Pick<Vote, 'type'>
 
@@ -51,7 +52,10 @@ const Post: FC<PostProps> = ({
                 <span className='px-1'>•</span>
               </>
             ) : null}
-            <span>Posted by u/{post.author.username}</span>{' '}
+            {/* <UserAvatar
+          user={{ name: post.author.name || null,image: post.author.image || null, }}className='h-4 w-4' />  */}
+         <span>Posted by  
+        u/{post.author.username}</span>{' '}
             {formatTimeToNow(new Date(post.createdAt))}
           </div>
           <a href={`/r/${subredditName}/post/${post.id}`}>

@@ -1,5 +1,4 @@
 
-import CustomFeed from '@/components/homepage/CustomFeed'
 import GeneralFeed from '@/components/homepage/GeneralFeed'
 import MyCommunities from '@/components/homepage/MyCommunities'
 import Sidebar from '@/components/Sidebar'
@@ -8,6 +7,7 @@ import { getAuthSession } from '@/lib/auth'
 import { HomeIcon, ShieldQuestion, TrendingUpIcon, UserIcon } from 'lucide-react'
 
 import Link from 'next/link'
+import CreateComment from '@/components/CreateComment'
 
 export const dynamic = 'force-dynamic'
 export const fetchCache = 'force-no-store'
@@ -32,8 +32,8 @@ export default async function Home() {
 
     {/* Middle Content */}
     <div className='md:col-span-4 overflow-auto'>
-    {/* <div className='flex items-center gap-2 mb-2'>
-      <Link className="bg-white text-gray-500 border  rounded-full flex items-center px-3 py-1 hover:shadow-lg active:shadow-sm transition-all " href={`/`}>
+    <div className='flex items-center gap-2 mb-2'>
+      <Link className="bg-white text-black border border-gray-300 shadow-sm rounded-full flex items-center px-3 py-1 hover:shadow-lg active:shadow-sm transition-all " href={`/`}>
            <HomeIcon className="mr-2 h-4 w-4" />
            <span>Feed</span>
       </Link>
@@ -41,13 +41,13 @@ export default async function Home() {
             <TrendingUpIcon className="mr-2 h-4 w-4" />
            <span>Trend</span>
       </Link>
-      <Link className="bg-white text-black border border-gray-300 shadow-sm rounded-full flex items-center px-3 py-1 hover:shadow-lg active:shadow-sm transition-all" href={`/ask`}>
+      <Link className="bg-white text-grey-500 border  rounded-full flex items-center px-3 py-1 hover:shadow-lg active:shadow-sm transition-all" href={`/`}>
             <ShieldQuestion className="mr-2 h-4 w-4" />
            <span>Ask</span>
       </Link>
-      </div> */}
+      </div>
   {/* @ts-expect-error server component */}
-  {session ? <CustomFeed /> : <GeneralFeed />}
+  {session ? <CreateComment /> : <GeneralFeed />}
      
     </div>
 
