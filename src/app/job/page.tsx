@@ -6,9 +6,9 @@ export default function Component() {
     <section className="w-full h-full py-20">
       <div className="container flex flex-col items-center px-4 space-y-4 md:px-6 md:space-y-8">
         <div className="text-center">
-          <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl">Events </h1>
+          <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl">Jobs </h1>
           <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400">
-          Get ready to connect with groundbreaking events </p>
+          exclusive job listings tailored for professional software engineers</p>
         </div>
         <div className="space-y-4">
           <Link

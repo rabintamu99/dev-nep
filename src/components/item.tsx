@@ -44,7 +44,7 @@ const SidebarItem = ({ item }: { item: ISidebarItem }) => {
   return (
     <>
       <div
-        className={`flex items-center p-3 rounded-lg hover:bg-slate-100 hover:shadow-lg active:shadow-sm transition-all cursor-pointer hover:text-sidebar-active justify-between
+        className={`flex items-center p-3 rounded-full hover:bg-slate-100 active:shadow-sm transition-all cursor-pointer hover:text-sidebar-active justify-between
      ${isActive && "text-sidebar-active bg-sidebar-background"}
     `}
         onClick={onClick}

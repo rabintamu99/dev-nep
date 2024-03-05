@@ -1,80 +1,53 @@
-'use client'
+"use client";
 
+import { addQuestion } from '@/actions/actions';
+import { useRef } from "react";
+import { UserAvatar } from './UserAvatar'
 import { Button } from '@/components/ui/Button'
-import { toast } from '@/hooks/use-toast'
-import { CommentRequest } from '@/lib/validators/comment'
-
-import { useCustomToasts } from '@/hooks/use-custom-toasts'
-import { useMutation } from '@tanstack/react-query'
-import axios, { AxiosError } from 'axios'
-import { useRouter } from 'next/navigation'
-import { FC, useState } from 'react'
 import { Label } from '@/components/ui/Label'
+import { Input } from '@/components/ui/Input'
 import { Textarea } from '@/components/ui/Textarea'
+import { getAuthSession } from '@/lib/auth'
+import { PlusIcon } from 'lucide-react';
 
-interface CreateCommentProps {
-  postId: string
-  replyToId?: string
-}
 
-const CreateAsk: FC<CreateCommentProps> = ({ postId, replyToId }) => {
-  const [input, setInput] = useState<string>('')
-  const router = useRouter()
-  const { loginToast } = useCustomToasts()
+const Page = async () => {
+  const ref = useRef<HTMLFormElement>(null)
 
-  const { mutate: comment, isLoading } = useMutation({
-    mutationFn: async ({ postId, text, replyToId }: CommentRequest) => {
-      const payload: CommentRequest = { postId, text, replyToId }
-
-      const { data } = await axios.patch(
-        `/api/subreddit/post/comment/`,
-        payload
-      )
-      return data
-    },
-
-    onError: (err) => {
-      if (err instanceof AxiosError) {
-        if (err.response?.status === 401) {
-          return loginToast()
-        }
-      }
-
-      return toast({
-        title: 'Something went wrong.',
-        description: "Comment wasn't created successfully. Please try again.",
-        variant: 'destructive',
-      })
-    },
-    onSuccess: () => {
-      router.refresh()
-      setInput('')
-    },
-  })
 
   return (
-    <div className='grid w-full gap-1.5'>
-      <Label htmlFor='comment'>Start Asking</Label>
-      <div className='mt-2'>
-        <Textarea
-          id='comment'
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          rows={1}
-          placeholder='What are your thoughts?'
+    <form className="flex items-center mt-4"  ref={ref}
+      action={async (formData) => {
+        await addQuestion(formData)
+        ref.current?.reset()
+      }}>
+
+<div className='grid w-full'>
+    <Label htmlFor='comment'>Having a problem? Ask our experts.</Label>
+    <div className='mt-4 gap-1 bg-zinc-50 rounded-full flex items-center justify-between'>
+        <Input
+            id='comment'
+            name='text'
+            placeholder='What are your thoughts?'
+            required
+            className="text-lg bg-white rounded-full font-medium"
+            
         />
-
-        <div className='mt-2 flex justify-end'>
-          <Button
-            isLoading={isLoading}
-            disabled={input.length === 0}
-            onClick={() => comment({ postId, text: input, replyToId })}>
-            Post
-          </Button>
-        </div>
-      </div>
+        <Button type='submit' className="bg-zinc-600 text-white rounded-full p-2 shadow-lg">
+            <PlusIcon className="h-6 w-6" />
+        </Button>
     </div>
-  )
-}
+</div>
 
-export default CreateAsk
+    
+  </form>
+  );
+};
+
+export default Page;
+
+
+
+<div className="max-w-3xl mx-auto mt-4 p-4 bg-white rounded-full shadow flex items-center justify-between">
+
+</div>

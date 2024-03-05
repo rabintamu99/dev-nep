@@ -31,7 +31,7 @@ export default async function Home() {
     </div>
 
     {/* Middle Content */}
-    <div className='md:col-span-4 overflow-auto'>
+    <div className='md:col-span-4'>
     {/* <div className='flex items-center gap-2 mb-2'>
       <Link className="bg-white text-gray-500 border  rounded-full flex items-center px-3 py-1 hover:shadow-lg active:shadow-sm transition-all " href={`/`}>
            <HomeIcon className="mr-2 h-4 w-4" />

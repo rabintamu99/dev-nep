@@ -2,12 +2,13 @@
 
 import { formatTimeToNow } from '@/lib/utils'
 import { Post, User, Vote } from '@prisma/client'
-import { MessageSquare } from 'lucide-react'
+import { MessageCircle, MessageSquare, MessagesSquare } from 'lucide-react'
 import Link from 'next/link'
 import { FC, useRef } from 'react'
 import EditorOutput from './EditorOutput'
 import PostVoteClient from './post-vote/PostVoteClient'
 import { UserAvatar } from './UserAvatar'
+import ShareComponent from './ShareComponent'
 
 type PartialVote = Pick<Vote, 'type'>
 
@@ -32,7 +33,7 @@ const Post: FC<PostProps> = ({
   const pRef = useRef<HTMLParagraphElement>(null)
 
   return (
-    <div className='rounded-md bg-white shadow'>
+    <div className='flex flex-col  rounded-sm bg-white dark:bg-slate-600 dark:border-white  shadow-white'>
       <div className='px-2 py-4 flex justify-between'>
         <PostVoteClient
           postId={post.id}
@@ -45,7 +46,7 @@ const Post: FC<PostProps> = ({
             {subredditName ? (
               <>
                 <a
-                  className='underline text-zinc-900 text-sm underline-offset-2'
+                  className='underline text-zinc-900 dark:text-white dark:bg-slate-800 text-sm underline-offset-2'
                   href={`/r/${subredditName}`}>
                   r/{subredditName}
                 </a>
@@ -54,12 +55,13 @@ const Post: FC<PostProps> = ({
             ) : null}
             {/* <UserAvatar
           user={{ name: post.author.name || null,image: post.author.image || null, }}className='h-4 w-4' />  */}
-         <span>Posted by  
-        u/{post.author.username}</span>{' '}
+         <span className='px-1'>Posted by </span>
+         <span> 
+             {post.author.name}</span>{' '}
             {formatTimeToNow(new Date(post.createdAt))}
           </div>
           <a href={`/r/${subredditName}/post/${post.id}`}>
-            <h1 className='text-lg font-semibold py-2 leading-6 text-gray-900'>
+            <h1 className='text-lg font-semibold py-2 leading-6 text-gray-900 dark:text-white'>
               {post.title}
             </h1>
           </a>
@@ -70,18 +72,19 @@ const Post: FC<PostProps> = ({
             <EditorOutput content={post.content} />
             {pRef.current?.clientHeight === 160 ? (
               // blur bottom if content is too long
-              <div className='absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-white to-transparent'></div>
+              <div className='absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-white to-transparent dark:from-black'></div>
             ) : null}
           </div>
         </div>
       </div>
 
-      <div className='bg-gray-50 z-20 text-sm px-4 py-4 sm:px-6'>
+      <div className='flex justify-between bg-gray-80 dark:bg-slate-800 z-20 text-sm px-4  py-4 sm:px-6'>
         <Link
           href={`/r/${subredditName}/post/${post.id}`}
           className='w-fit flex items-center gap-2'>
-          <MessageSquare className='h-4 w-4' /> {commentAmt} comments
+          <MessagesSquare className='h-4 w-4' /> {commentAmt} comments
         </Link>
+        <ShareComponent />
       </div>
     </div>
   )

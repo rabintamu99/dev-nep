@@ -12,31 +12,33 @@ const TopUser = async () => {
     },
   });
   return (
-    <div>
-     <ul>
-        {Users.map((user) => (
-        <li key={user.id} className='text-zinc-900 text-xl px-2 rounded-sm hover:bg-slate-100'>
-        <Link href={`/u/${user.username}`}>
-          <div className='flex flex-col items-start gap-1.5'>
-            <div className='flex items-center '>
-              <UserAvatar
-                user={{ name: user.name || 'Unnamed User', image: user.image || '/default-avatar.png' }}
-                className='h-7 w-7 mx-2'
-              />
-              <div>
-              <p className='text-sm font-medium'>{user.name}</p>
-              <p className='text-sm'> {user._count.Post} Posts</p>
+<div>
+  <ul>
+    {Users.map((user, index) => (
+      <li key={user.id} className='text-zinc-900 dark:text-white text-xl px-2 py-2 rounded-sm hover:bg-slate-100'>
+        <div className='flex items-center'>
+          <span className='font-medium text-gray-400 mr-2'>{index + 1}</span> {/* Display ranking */}
+          <Link href={`/${user.username}`}>
+            <div className='flex flex-col items-start gap-1.5'>
+              <div className='flex items-center'>
+                <UserAvatar
+                  user={{ name: user.name || 'Unnamed User', image: user.image || '/default-avatar.png' }}
+                  className='h-7 w-7 mx-2'
+                />
+                <div>
+                  <p className='text-sm font-medium'>{user.name}</p>
+                  <p className='text-sm '> @{user.username}</p>
+                </div>
+                <p className='text-sm ml-4'> {user._count.Post} Posts</p>
               </div>
-             
             </div>
-            
-          </div>
-        </Link>
+          </Link>
+        </div>
       </li>
-      
-        ))}
-      </ul>
-  </div>
+    ))}
+  </ul>
+</div>
+
   
   );
 }

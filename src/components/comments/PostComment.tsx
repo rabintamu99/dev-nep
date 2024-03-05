@@ -79,15 +79,15 @@ const PostComment: FC<PostCommentProps> = ({
           className='h-6 w-6'
         />
         <div className='ml-2 flex items-center gap-x-2'>
-          <p className='text-sm font-medium text-gray-900'>u/{comment.author.username}</p>
-
+          <p className='text-md font-medium text-gray-900'>{comment.author.name}</p>
+          <p className='text-sm font-medium text-gray-400'>@{comment.author.username}</p>
           <p className='max-h-40 truncate text-xs text-zinc-500'>
             {formatTimeToNow(new Date(comment.createdAt))}
           </p>
         </div>
       </div>
 
-      <p className='text-sm text-zinc-900 mt-2'>{comment.text}</p>
+      <p className='text-sm text-zinc-900 mt-2 ml-5'>{comment.text}</p>
 
       <div className='flex gap-2 items-center'>
         <CommentVotes

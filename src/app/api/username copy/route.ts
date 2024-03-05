@@ -1,6 +1,7 @@
 import { getAuthSession } from '@/lib/auth'
 import { db } from '@/lib/db'
-import { UsernameValidator } from '@/lib/validators/username'
+import { UsernameValidator } from '@/lib/validators/username' 
+import { BioValidator } from '@/lib/validators/bio' 
 import { z } from 'zod'
 
 export async function PATCH(req: Request) {
@@ -12,9 +13,12 @@ export async function PATCH(req: Request) {
     }
 
     const body = await req.json()
-    const { name } = UsernameValidator.parse(body)
-    const { fname } = UsernameValidator.parse(body)
-    // check if username is taken
+    const { name, bio } = z.object({ // Validate both username and bio
+      name: UsernameValidator,
+      bio: BioValidator // Define BioValidator in your validators
+    }).parse(body)
+
+    // Check if username is taken
     const username = await db.user.findFirst({
       where: {
         username: name,
@@ -25,27 +29,25 @@ export async function PATCH(req: Request) {
       return new Response('Username is taken', { status: 409 })
     }
 
-    // update username
+    // Update username and bio
     await db.user.update({
       where: {
         id: session.user.id,
       },
       data: {
         username: name,
-        name: fname,
+       // Include bio in the update
       },
     })
 
     return new Response('OK')
   } catch (error) {
-    (error)
-
     if (error instanceof z.ZodError) {
       return new Response(error.message, { status: 400 })
     }
 
     return new Response(
-      'Could not update setting at this time. Please try later',
+      'Could not update username and bio at this time. Please try later',
       { status: 500 }
     )
   }

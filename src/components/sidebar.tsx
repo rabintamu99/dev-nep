@@ -42,7 +42,7 @@ const items: ISidebarItem[] = [
   },
   {
     name: "Ask",
-    path: "/ask",
+    path: "/question",
     icon: FileQuestionIcon,
   },
   {

@@ -25,12 +25,12 @@ export default function RootLayout({
     <html
       lang='en'
       className={cn(
-        'bg-white text-slate-900 antialiased light',
+        'bg-white dark:bg-black text-slate-900 antialiased light',
         inter.className
       )}>
         
         
-      <body className='min-h-screen  max-w-8xl pt-8 bg-slate-50 antialiased'>
+      <body className='min-h-screen  max-w-8xl pt-8 bg-slate-50 dark:bg-slate-800 antialiased'>
       <ThemeProvider
             attribute="class"
             defaultTheme="system"
