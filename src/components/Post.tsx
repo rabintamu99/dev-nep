@@ -43,20 +43,25 @@ const Post: FC<PostProps> = ({
 
         <div className='w-0 flex-1'>
           <div className='max-h-40 mt-1 text-xs text-gray-500'>
+
+         
             {subredditName ? (
               <>
+               <UserAvatar
+          user={{ name: post.author.name || null,image: post.author.image || null, }}className='h-4 w-4' /> 
                 <a
                   className='underline text-zinc-900 dark:text-white dark:bg-slate-800 text-sm underline-offset-2'
                   href={`/r/${subredditName}`}>
-                  r/{subredditName}
+                  circle/{subredditName}
                 </a>
                 <span className='px-1'>•</span>
               </>
             ) : null}
-            {/* <UserAvatar
-          user={{ name: post.author.name || null,image: post.author.image || null, }}className='h-4 w-4' />  */}
+    
          <span className='px-1'>Posted by </span>
+       
          <span> 
+          
              {post.author.name}</span>{' '}
             {formatTimeToNow(new Date(post.createdAt))}
           </div>

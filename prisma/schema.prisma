@@ -63,7 +63,11 @@ model User {
   CommentVote CommentVote[]
   Question     Question[]
   QuestionVote QuestionVote[]
+  followedBy    Follows[]   @relation("following")
+  following     Follows[]   @relation("follower")
 }
+
+
 
 model Subreddit {
   id        String   @id @default(cuid())
@@ -86,6 +90,17 @@ model Subscription {
   subredditId String
 
   @@id([userId, subredditId])
+}
+
+model Follows {
+    follower    User   @relation("follower", fields: [followerId], references: [id])
+    followerId  String
+    following   User   @relation("following", fields: [followingId], references: [id])
+    followingId String
+
+    @@id([followerId, followingId])
+    @@index([followerId])
+    @@index([followingId])
 }
 
 model Post {
@@ -151,6 +166,8 @@ model Question {
   replies   Question[] @relation("ReplyTo")
 
   votes     QuestionVote[]
+  like      Like[]
+  save    Save[]
   QuestionId String?
 }
 
@@ -163,4 +180,25 @@ model QuestionVote {
   type      VoteType
 
   @@id([userId, questionId])
+}
+
+
+model Like {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    question      Question     @relation(fields: [questionId], references: [id], onDelete: Cascade)
+    questionId    String
+    userId    String   @map("user_id")
+    @@unique([questionId, userId])
+    @@index([userId])
+}
+
+
+model Save {
+    id    String @id @default(dbgenerated("concat('save_', replace(cast(gen_random_uuid() as text), '-', ''))")) @db.Text
+    createdAt   DateTime @default(now())
+    userId      String
+    questionId String
+    question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
 }

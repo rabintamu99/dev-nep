@@ -31,7 +31,7 @@ interface ISubItem {
 
 const items: ISidebarItem[] = [
   {
-    name: "Home",
+    name: "Feed",
     path: "/",
     icon: HomeIcon,
   },
@@ -46,6 +46,11 @@ const items: ISidebarItem[] = [
     icon: FileQuestionIcon,
   },
   {
+    name: "Article",
+    path: "/profile/post",
+    icon: FileIcon,
+  },
+  {
     name: "Events",
     path: "/event",
     icon: CalendarCheck2Icon,
@@ -56,7 +61,7 @@ const items: ISidebarItem[] = [
     icon: PenBoxIcon,
   },
   {
-    name: "Create Community",
+    name: "Create Circle",
     path: "/r/create",
     icon: PlusSquareIcon,
   },
@@ -70,22 +75,31 @@ const items: ISidebarItem[] = [
     path: "/setting",
     icon: BellIcon,
   },
-  {
-    name: "Posts",
-    path: "/profile/post",
-    icon: FileIcon,
-  },
+
 
 
 ];
 
 const Sidebar = () => {
   return (
+    <div className='md:col-span-2'>
+    <div className='overflow-hidden rounded-lg border border-gray-200'>
+      <div className='bg-emerald-0 px-4 py-4'>
         <div className="flex flex-col space-y-2 px-2 ">
           {items.map((item, index) => (
             <SidebarItem key={index} item={item} />
           ))}
         </div>
+           </div>
+           <dl className='-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6'>
+             <div className='flex justify-between gap-x-4 py-3'></div>
+           </dl>
+         </div>
+         <div className="p-4 flex items-center justify-center border-t">
+          <p className="text-xs text-gray-500">© 2024 DEV NEP, Inc. All rights reserved.</p>
+        </div>
+       </div>
+   
    
    
   );

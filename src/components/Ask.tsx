@@ -4,9 +4,11 @@ import { formatTimeToNow } from '@/lib/utils';
 import { addQuestion } from '@/actions/actions';
 
 import PostAsk from './PostAsk';
-import { BookmarkIcon, HeartIcon, MessageCircle, MessageCircleIcon } from 'lucide-react';
+import { BookmarkIcon, HeartIcon, MessageCircle, MessageCircleIcon, ReplyIcon, Share2Icon, ShareIcon } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/Card';
 import { UserAvatar } from './UserAvatar';
+import LikeButton from './LikeButton';
+import SaveComponent from './SaveComponent';
 
 const Page = async () => {
     const questions = await db.question.findMany({
@@ -30,25 +32,27 @@ const Page = async () => {
                 className='h-10 w-10 mx-2'
             />
             <div>
-                <CardTitle>{question.author.name}</CardTitle>
-                <CardDescription>{formatTimeToNow(question.createdAt)}</CardDescription>
+                <CardTitle>{question.author.name} <span className='text-zinc-400 text-sm'>@{question.author.username}</span></CardTitle>
+                <CardDescription>posted {formatTimeToNow(question.createdAt)}</CardDescription>
             </div>
         </div>
     </CardHeader>
   <CardContent>
+  <a href={`/question/${question.id}`}>
     <p> {question.text}</p>
+    </a>
   </CardContent>
   <CardFooter className='justify-between'>
    
     <div className='flex gap-2 items-center'>
-      <HeartIcon className='h-7 w-7 p-1 bg-zinc-100 rounded-full' />
-      <p className='text-sm text-zinc-600'>0</p>
-      <MessageCircle className='h-7 w-7 p-1 bg-zinc-100 rounded-full'/>
+      <LikeButton />
+      <ReplyIcon className='h-7 w-7 p-1 bg-zinc-100 rounded-full'/>
     <p> answer</p>
     </div>
-    <div className='flex gap-2 items-center'>
-      <BookmarkIcon className='h-7 w-7 p-1 bg-zinc-100 rounded-full' />
-      <p className='text-sm text-zinc-600'>0</p>
+    <div className='flex gap-4 items-center'>
+        {/* @ts-expect-error server component */}
+     <SaveComponent />
+     <ShareIcon />
     </div>
 
   </CardFooter>

@@ -24,16 +24,16 @@ const Page = async () => {
 
 <div className='grid w-full'>
     <Label htmlFor='comment'>Having a problem? Ask our experts.</Label>
-    <div className='mt-4 gap-1 bg-zinc-50 rounded-full flex items-center justify-between'>
+    <div className='mt-4 rounded-full flex items-center justify-between'>
         <Input
             id='comment'
             name='text'
             placeholder='What are your thoughts?'
             required
-            className="text-lg bg-white rounded-full font-medium"
+            className="text-lg bg-white rounded-full font-sm shadow-lg"
             
         />
-        <Button type='submit' className="bg-zinc-600 text-white rounded-full p-2 shadow-lg">
+        <Button type='submit' className="bg-zinc-600 text-white rounded-full shadow-lg">
             <PlusIcon className="h-6 w-6" />
         </Button>
     </div>
