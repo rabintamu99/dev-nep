@@ -33,8 +33,8 @@ const Post: FC<PostProps> = ({
   const pRef = useRef<HTMLParagraphElement>(null)
 
   return (
-    <div className='flex flex-col  rounded-sm bg-white dark:bg-slate-600 dark:border-white  shadow-white'>
-      <div className='px-2 py-4 flex justify-between'>
+    <div className='flex flex-col rounded-sm bg-white dark:bg-slate-600 dark:border-white  shadow-white'>
+      <div className='py-4 flex justify-between'>
         <PostVoteClient
           postId={post.id}
           initialVotesAmt={_votesAmt}
@@ -42,15 +42,23 @@ const Post: FC<PostProps> = ({
         />
 
         <div className='w-0 flex-1'>
-          <div className='max-h-40 mt-1 text-xs text-gray-500'>
-
+          <div className='max-h-50 mt-1 text-xs text-gray-500'>
+            <div className='flex justify-start gap-2 items-center'>
+              
+              <UserAvatar
+          user={{ name: post.author.name || null,image: post.author.image || null, }}className='h-8 w-8' /> 
+          <a href={`/${post.author.username}`}>
+          <span className='text-sm font-semibold text-zinc-500 dark:text-white dark:bg-slate-800'> 
+          
+          {post.author.name}</span>{' '}
          
+              </a>
+        
             {subredditName ? (
               <>
-               <UserAvatar
-          user={{ name: post.author.name || null,image: post.author.image || null, }}className='h-4 w-4' /> 
+               <span>Posted in </span>
                 <a
-                  className='underline text-zinc-900 dark:text-white dark:bg-slate-800 text-sm underline-offset-2'
+                  className=' text-zinc-900 dark:text-white dark:bg-slate-800 text-sm underline-offset-2'
                   href={`/r/${subredditName}`}>
                   circle/{subredditName}
                 </a>
@@ -58,21 +66,19 @@ const Post: FC<PostProps> = ({
               </>
             ) : null}
     
-         <span className='px-1'>Posted by </span>
-       
-         <span> 
-          
-             {post.author.name}</span>{' '}
             {formatTimeToNow(new Date(post.createdAt))}
           </div>
           <a href={`/r/${subredditName}/post/${post.id}`}>
-            <h1 className='text-lg font-semibold py-2 leading-6 text-gray-900 dark:text-white'>
+            <h1 className='text-lg font-semibold py-4 leading-6 text-gray-900 dark:text-white'>
               {post.title}
             </h1>
           </a>
 
+            </div>
+      
+
           <div
-            className='relative text-sm max-h-40 w-full overflow-clip'
+            className=' relative text-sm max-h-40 w-full overflow-clip'
             ref={pRef}>
             <EditorOutput content={post.content} />
             {pRef.current?.clientHeight === 160 ? (

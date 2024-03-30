@@ -94,7 +94,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName }) => {
         <li className='flex justify-center'>
           <Loader2 className='w-6 h-6 text-zinc-500 animate-spin' />
         </li>
-      )}
+      )}1
     </ul>
   )
 }

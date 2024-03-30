@@ -3,7 +3,7 @@ import { authOptions } from '@/lib/auth'
 import { getServerSession } from 'next-auth'
 import Link from 'next/link'
 import { Icons } from './Icons'
-import { buttonVariants } from './ui/Button'
+import { Button, buttonVariants } from './ui/Button'
 import { UserAccountNav } from './UserAccountNav'
 import SearchBar from './SearchBar'
 import { ModeToggle } from '@/components/ModeToggle'
@@ -17,7 +17,7 @@ const Navbar = async () => {
         {/* logo */}
         <Link href='/' className='flex gap-2 items-center'>
           <Icons.logo className='h-8 w-8 sm:h-6 sm:w-6' />
-          <p className=' text-zinc-700 text-md font-bold md:block'>NEP.DEV</p>
+          <Button className=' text-white text-md font-bold md:block'>NEP.DEV</Button>
         </Link>
 
       

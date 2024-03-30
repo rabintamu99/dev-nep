@@ -22,7 +22,7 @@ export async function POST(req: Request) {
     })
 
     if (subredditExists) {
-      return new Response('Subreddit already exists', { status: 409 })
+      return new Response('circle already exists', { status: 409 })
     }
 
     // create subreddit and associate it with the user

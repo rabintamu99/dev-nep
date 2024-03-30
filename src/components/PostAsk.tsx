@@ -30,10 +30,10 @@ const Page = async () => {
             name='text'
             placeholder='What are your thoughts?'
             required
-            className="text-lg bg-white rounded-full font-sm shadow-lg"
+            className="text-lg bg-white rounded-full font-sm"
             
         />
-        <Button type='submit' className="bg-zinc-600 text-white rounded-full shadow-lg">
+        <Button type='submit' className="bg-zinc-600 text-white rounded-full">
             <PlusIcon className="h-6 w-6" />
         </Button>
     </div>

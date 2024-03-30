@@ -3,6 +3,7 @@ import { db } from '@/lib/db'
 import Link from 'next/link'
 import { UserAvatar } from '@/components/UserAvatar'
 import { UserIcon } from 'lucide-react';
+import FollowUnfollowButton from '../FollowUnfollowButton';
 
 const TopUser = async () => {
   const Users = await db.user.findMany({
@@ -43,7 +44,8 @@ const TopUser = async () => {
            </div>
          </div>
        </div>
-       <button className='text-sm outline rounded-full p-1'>follow</button> {/* Follow button aligned to the right */}
+       {/* <button className='text-sm outline rounded-full p-1'>follow</button> */}
+       <FollowUnfollowButton targetUserId={user.id} />
      </div>
    </li>
    

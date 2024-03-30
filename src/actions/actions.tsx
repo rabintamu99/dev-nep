@@ -43,7 +43,7 @@ export async function addQuestion(formData: FormData) {
 export async function likePost(value: FormDataEntryValue | null) {
 
   const session = await getAuthSession();
-  const userId = session.user.id;
+  const userId = session?.user.id;
 
   const validatedFields = LikeSchema.safeParse({ questionId: value });
 

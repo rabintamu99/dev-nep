@@ -26,9 +26,9 @@ export default function Footer() {
             </Link>
           </div>
         </div>
-        <div className="text-center text-sm text-muted-foreground">
+        {/* <div className="text-center text-sm text-muted-foreground">
           © {new Date().getFullYear()} DEV NEP, Inc. All rights reserved.
-        </div>
+        </div> */}
       </div>
     </footer>
   );

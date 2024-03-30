@@ -52,13 +52,14 @@ model User {
   createdSubreddits Subreddit[]    @relation("CreatedBy")
   subscriptions     Subscription[]
   votes             Vote[]
-
+  likes     Like[]
   username String? @unique
 
   image       String?
   accounts    Account[]
   sessions    Session[]
   Post        Post[]
+  Article        Article[]
   Comment     Comment[]
   CommentVote CommentVote[]
   Question     Question[]
@@ -107,14 +108,46 @@ model Post {
   id          String    @id @default(cuid())
   title       String
   content     Json?
+  isDraft     Boolean   @default(false)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   author      User      @relation(fields: [authorId], references: [id])
   authorId    String
-  subreddit   Subreddit @relation(fields: [subredditId], references: [id])
-  subredditId String
+  subreddit   Subreddit? @relation(fields: [subredditId], references: [id])
+  subredditId String?
   comments    Comment[] 
   votes       Vote[]
+}
+
+model Article {
+  id          String    @id @default(cuid())
+  title       String
+  content     Json?
+  isDraft     Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  author      User      @relation(fields: [authorId], references: [id])
+  authorId    String
+  likes_count Int @default(0)
+  likes     Like[]
+  tags        Tag[]      @relation("ArticleTag")
+}
+model Like {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  article   Article  @relation(fields: [articleId], references: [id])
+  articleId String
+  createdAt DateTime @default(now())
+
+  @@unique([userId, articleId])
+}
+
+model Tag {
+  id    String @id @default(cuid())
+  name  String @unique
+  articles Article[] @relation("ArticleTag")
+ 
 }
 
 model Comment {
@@ -139,6 +172,7 @@ model Vote {
   userId String
   post   Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId String
+
   type   VoteType
 
   @@id([userId, postId])
@@ -166,7 +200,6 @@ model Question {
   replies   Question[] @relation("ReplyTo")
 
   votes     QuestionVote[]
-  like      Like[]
   save    Save[]
   QuestionId String?
 }
@@ -182,17 +215,6 @@ model QuestionVote {
   @@id([userId, questionId])
 }
 
-
-model Like {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    question      Question     @relation(fields: [questionId], references: [id], onDelete: Cascade)
-    questionId    String
-    userId    String   @map("user_id")
-    @@unique([questionId, userId])
-    @@index([userId])
-}
 
 
 model Save {

@@ -1,79 +1,64 @@
-'use server';
-import { db } from '@/lib/db';
 import { getAuthSession } from '@/lib/auth';
-import { revalidatePath } from 'next/cache';
+import { db } from '@/lib/db';
 
-import {
-    BookmarkSchema,
+export async function likePost(req : Request, res : Response) {
+  const session = await getAuthSession();
 
-    LikeSchema,
-   
-  } from "./schemas";
-  
-  export async function likePost(value: FormDataEntryValue | null) {
-    const session = await getAuthSession()
+  if (!session?.user) {
+    return new Response('Unauthorized', { status: 401 });
+  }
 
-    // only rendered if session exists, so this will not happen
-  
-    const userId = session.user.id;
-  
-    const validatedFields = LikeSchema.safeParse({ questionId: value });
-  
-    if (!validatedFields.success) {
-      return {
-        errors: validatedFields.error.flatten().fieldErrors,
-        message: "Missing Fields. Failed to Like Post.",
-      };
+  const userId = session.user.id;
+
+  // Check if the user has already liked the article
+  const existingLike = await db.like.findFirst({
+    where: {
+      userId: session.user.id,
+      articleId,
+    },
+  });
+
+  const article = await db.article.findUnique({
+      where: {
+        id: articleId,
+      },
+      include: {
+        author: true,
+        likes: true,
+      },
+    })
+
+    if (!article) {
+      return new Response('Article not found', { status: 404 });
     }
   
-    const { questionId } = validatedFields.data;
-  
-    const post = await db.post.findUnique({
-      where: {
-        id: questionId,
-      },
-    });
-  
-    if (!post) {
-      throw new Error("Post not found");
-    }
-  
-    const like = await db.like.findUnique({
-      where: {
-        questionId_userId: {
-          questionId,
-          userId,
-        },
-      },
-    });
-  
-    if (like) {
-      try {
-        await db.like.delete({
-          where: {
-            questionId_userId: {
-              questionId,
-              userId,
-            },
+    if (existingLike) {
+      // If the user has already liked the article, remove the like
+      await db.like.delete({
+        where: {
+          userId_articleId: {
+            articleId,
+            userId,
           },
-        });
-        revalidatePath("/dashboard");
-        return { message: "Unliked Post." };
-      } catch (error) {
-        return { message: "Database Error: Failed to Unlike Post." };
-      }
-    }
-  
-    try {
-      await db.like.create({
-        data: {
-          questionId,
-          userId,
         },
       });
-      revalidatePath("/dashboard");
-      return { message: "Liked Post." };
-    } catch (error) {
-      return { message: "Database Error: Failed to Like Post." };
+    } else {
+      // If the user hasn't liked the article, create a new like
+      await db.like.create({
+        data: {
+          user: {
+            connect: {
+              id: userId,
+            },
+          },
+          article: {
+            connect: {
+              id: articleId,
+            },
+          },
+        },
+      });
     }
+  
+    return new Response('OK');
   }

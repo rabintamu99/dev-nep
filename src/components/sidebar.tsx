@@ -13,7 +13,7 @@ import {
   FileIcon,
   PlusSquareIcon,
   TrendingUpIcon,
-  FileQuestionIcon,
+  MessageCircleQuestionIcon,
 } from "lucide-react";
 import SidebarItem from "./item";
 
@@ -43,11 +43,11 @@ const items: ISidebarItem[] = [
   {
     name: "Ask",
     path: "/question",
-    icon: FileQuestionIcon,
+    icon: MessageCircleQuestionIcon,
   },
   {
     name: "Article",
-    path: "/profile/post",
+    path: "/article",
     icon: FileIcon,
   },
   {
@@ -106,3 +106,4 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
