@@ -11,6 +11,7 @@ import MyCommunities from '@/components/homepage/MyCommunities';
 import TopUser from '@/components/homepage/TopUsers';
 import FollowButton from '@/components/FollowUnfollowButton';
 import FollowUnfollowButton from '@/components/FollowUnfollowButton';
+import ArticleComment from '@/components/comments/ArticleComment';
 
 export default async function ArticlePage({
     params: { articleId },

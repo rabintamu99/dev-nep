@@ -31,40 +31,40 @@ interface ISubItem {
 
 const items: ISidebarItem[] = [
   {
-    name: "Account",
-    path: "/",
-    icon: User2Icon,
-  },
-  {
     name: "Profile",
-    path: "/event",
+    path: "/settings/profile",
     icon: UserCircle2Icon,
   },
   {
-    name: "Security",
-    path: "/job",
-    icon: LockIcon,
+    name: "Account",
+    path: "/settings/account",
+    icon: Users2Icon,
   },
-  {
-    name: "Password",
-    path: "/r/create",
-    icon: LucideLock,
-  },
-  {
-    name: "Setting",
-    path: "/settings",
-    icon: Settings2Icon,
-  },
-  {
-    name: "Notifications",
-    path: "/setting",
-    icon: BellIcon,
-  },
-  {
-    name: "Posts",
-    path: "/setting",
-    icon: FileIcon,
-  },
+  // {
+  //   name: "Security",
+  //   path: "/job",
+  //   icon: LockIcon,
+  // },
+  // {
+  //   name: "Password",
+  //   path: "/r/create",
+  //   icon: LucideLock,
+  // },
+  // {
+  //   name: "Setting",
+  //   path: "/settings",
+  //   icon: Settings2Icon,
+  // },
+  // {
+  //   name: "Notifications",
+  //   path: "/setting",
+  //   icon: BellIcon,
+  // },
+  // {
+  //   name: "Posts",
+  //   path: "/setting",
+  //   icon: FileIcon,
+  // },
 
 
 ];

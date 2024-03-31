@@ -10,6 +10,7 @@ import axios, { AxiosError } from 'axios'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { Icons } from '@/components/Icons'
+import { Description } from '@radix-ui/react-toast'
 
 const Page = () => {
   const router = useRouter()
@@ -20,6 +21,7 @@ const Page = () => {
     mutationFn: async () => {
       const payload: CreateSubredditPayload = {
         name: input,
+        description: input.description,
       }
 
       const { data } = await axios.post('/api/subreddit', payload)
@@ -78,6 +80,21 @@ const Page = () => {
             </p>
             <Input
               value={input}
+              onChange={(e) => setInput(e.target.value)}
+              className='pl-6'
+            />
+          </div>
+        </div>
+        <div>
+          <p className='text-lg font-medium'>Circle Description</p>
+          <p className='text-xs pb-2'>
+            Circle names including capitalization cannot be changed.
+          </p>
+          <div className='relative'>
+            <p className='absolute text-sm left-0 w-8 inset-y-0 grid place-items-center text-zinc-400'>
+            </p>
+            <Input
+              value={Description}
               onChange={(e) => setInput(e.target.value)}
               className='pl-6'
             />
