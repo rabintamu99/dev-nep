@@ -14,14 +14,15 @@ import { Description } from '@radix-ui/react-toast'
 
 const Page = () => {
   const router = useRouter()
-  const [input, setInput] = useState<string>('')
+  const [name, setName] = useState<string>('')
+  const [about, setAbout] = useState<string>('')
   const { loginToast } = useCustomToasts()
 
   const { mutate: createCommunity, isLoading } = useMutation({
     mutationFn: async () => {
       const payload: CreateSubredditPayload = {
-        name: input,
-        description: input.description,
+        name: name,
+        about: about,
       }
 
       const { data } = await axios.post('/api/subreddit', payload)
@@ -71,7 +72,7 @@ const Page = () => {
         <hr className='bg-red-500 h-px' />
 
         <div>
-          <p className='text-lg font-medium'>Circle Name</p>
+          <p className='text-lg font-medium'>Name</p>
           <p className='text-xs pb-2'>
             Circle names including capitalization cannot be changed.
           </p>
@@ -79,23 +80,23 @@ const Page = () => {
             <p className='absolute text-sm left-0 w-8 inset-y-0 grid place-items-center text-zinc-400'>
             </p>
             <Input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               className='pl-6'
             />
           </div>
         </div>
         <div>
-          <p className='text-lg font-medium'>Circle Description</p>
+          <p className='text-lg font-medium'>Description</p>
           <p className='text-xs pb-2'>
-            Circle names including capitalization cannot be changed.
+           Short description about the circle
           </p>
           <div className='relative'>
             <p className='absolute text-sm left-0 w-8 inset-y-0 grid place-items-center text-zinc-400'>
             </p>
             <Input
-              value={Description}
-              onChange={(e) => setInput(e.target.value)}
+              value={about}
+              onChange={(e) => setAbout(e.target.value)}
               className='pl-6'
             />
           </div>
@@ -110,7 +111,7 @@ const Page = () => {
           </Button>
           <Button
             isLoading={isLoading}
-            disabled={input.length === 0}
+            disabled={name.length === 0}
             onClick={() => createCommunity()}>
             Create Circle
           </Button>

@@ -10,14 +10,16 @@ import Sidebar from "@/components/Sidebar";
 import ProfileComponent from "@/components/ProfileComponent";
 import MyCommunities from "@/components/homepage/MyCommunities";
 import TopUser from "@/components/homepage/TopUsers";
+import FollowUnfollowButton from "@/components/FollowUnfollowButton";
+import { Session } from "inspector";
 export default async function profilePage({
   params: { username },
 }: {
   params: { username: string }
 }) {
 
-  const user = await getUser(username);
-
+ const user = await getUser(username);
+ const session = await getAuthSession();
 
 
 return (
@@ -71,11 +73,10 @@ return (
             {user?.bio}
             </p>
           </div>
-          <Button variant="outline">Follow</Button>
+             {session?.user && session.user.id !== user?.id && (
+             <FollowUnfollowButton targetUserId={user?.id} />)}
           </div>
-
           <div className="flex flex-col space-y-2">
-            
           </div>
 
     {/* Badges for WorkedWith, Followers, and Following */}

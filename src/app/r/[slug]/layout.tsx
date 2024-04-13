@@ -1,5 +1,6 @@
 import SubscribeLeaveToggle from '@/components/SubscribeLeaveToggle'
 import ToFeedButton from '@/components/ToFeedButton'
+import TopUser from '@/components/homepage/TopUsers'
 import { buttonVariants } from '@/components/ui/Button'
 import { getAuthSession } from '@/lib/auth'
 import { db } from '@/lib/db'
@@ -63,7 +64,14 @@ const Layout = async ({
   return (
     <div className='sm:container max-w-7xl mx-auto h-full'>
       <div>
+      
+        <div className='bg-zinc-100 rounded-md p-5 h-40'>
         <ToFeedButton />
+    <h1 className='font-bold text-3xl md:text-4xl h-14'>
+
+    {subreddit.name}
+</h1>
+    </div>
 
         <div className='grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 py-6'>
           <ul className='flex flex-col col-span-2 space-y-6'>{children}</ul>
@@ -71,9 +79,10 @@ const Layout = async ({
           {/* info sidebar */}
           <div className='overflow-hidden h-fit rounded-lg border border-gray-200 order-first md:order-last'>
             <div className='px-6 py-4'>
-              <p className='font-semibold py-3'>About /{subreddit.name}</p>
+              <p className='font-semibold py-3'>About {subreddit.name}</p>
             </div>
             <dl className='divide-y divide-gray-100 px-6 py-4 text-sm leading-6 bg-white'>
+            <p className='py-3'> {subreddit.about}</p>
               <div className='flex justify-between gap-x-4 py-3'>
                 <dt className='text-gray-500'>Created</dt>
                 <dd className='text-gray-700'>
@@ -90,7 +99,7 @@ const Layout = async ({
               </div>
               {subreddit.creatorId === session?.user?.id ? (
                 <div className='flex justify-between gap-x-4 py-3'>
-                  <dt className='text-gray-500'>You created this community</dt>
+                  <dt className='text-gray-500'>You created this circle</dt>
                 </div>
               ) : null}
 
