@@ -5,7 +5,7 @@ import Providers from '@/components/Providers'
 import { Toaster } from '@/components/ui/Toaster'
 import Footer from '@/components/footer'
 import '@/styles/globals.css'
-
+import { ThemeProvider } from "@/components/theme-provider"
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -21,25 +21,37 @@ export default function RootLayout({
   authModal: React.ReactNode
 }) {
   return (
+    
     <html
       lang='en'
       className={cn(
-        'bg-white text-slate-900 antialiased light',
+        'bg-white dark:bg-black text-slate-900 antialiased light',
         inter.className
       )}>
-      <body className='min-h-screen pt-12 bg-slate-50 antialiased'>
+        
+        
+      <body className='min-h-screen  max-w-8xl pt-8 bg-slate-50 dark:bg-slate-800 antialiased'>
+      <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
         <Providers>
+      
           {/* @ts-expect-error Server Component */}
           <Navbar />
           {authModal}
-
-          <div className='container max-w-7xl mx-auto h-full pt-12'>
+          <div className='container max-w-8xl mx-auto min-h-screen pt-12'>
             {children}
           </div>
           <Footer />
-        </Providers>
+          </Providers>
+          </ThemeProvider>
+      
         <Toaster />
       </body>
+     
     </html>
   )
 }

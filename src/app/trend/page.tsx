@@ -1,8 +1,5 @@
-import CustomFeed from '@/components/homepage/CustomFeed'
-import GeneralFeed from '@/components/homepage/GeneralFeed'
 import MyCommunities from '@/components/homepage/MyCommunities'
 import TopUser from '@/components/homepage/TopUsers'
-import { buttonVariants } from '@/components/ui/Button'
 import { getAuthSession } from '@/lib/auth'
 import { HomeIcon, Mail, MessageCircle, MessageCircleIcon, ShieldQuestion, Tent as TentIcon, TrendingUpIcon, UserIcon, Users2Icon } from 'lucide-react'
 import Link from 'next/link'
@@ -43,8 +40,8 @@ export default async function Home() {
               <UserIcon className='h-4 w-4' />
               Top Communities
             </p>
-            {/* @ts-expect-error server component
-            <MyCommunities /> */}
+            {/* @ts-expect-error server component */}
+            <MyCommunities />
           </div>
           <dl className='-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6'>
             <div className='flex justify-between gap-x-4 py-3'>
@@ -58,8 +55,8 @@ export default async function Home() {
               <UserIcon className='h-4 w-4' />
               Top Contributors
             </p>
-            {/* @ts-expect-error server component
-            <TopUser /> */}
+            {/* @ts-expect-error server component */}
+            <TopUser />
           </div>
           <dl className='-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6'>
             <div className='flex justify-between gap-x-4 py-3'>

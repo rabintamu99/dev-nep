@@ -25,7 +25,7 @@ import { useMutation } from '@tanstack/react-query'
 import axios, { AxiosError } from 'axios'
 
 interface UserNameFormProps extends React.HTMLAttributes<HTMLFormElement> {
-  user: Pick<User, 'id' | 'username'>
+  user: Pick<User, 'id' | 'username'| 'name'>
 }
 
 type FormData = z.infer<typeof UsernameValidator>
@@ -40,12 +40,13 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
     resolver: zodResolver(UsernameValidator),
     defaultValues: {
       name: user?.username || '',
+      fname: user?.name || '',
     },
   })
 
   const { mutate: updateUsername, isLoading } = useMutation({
-    mutationFn: async ({ name }: FormData) => {
-      const payload: FormData = { name }
+    mutationFn: async ({ name, fname}: FormData) => {
+      const payload: FormData = { name, fname }
 
       const { data } = await axios.patch(`/api/username/`, payload)
       return data
@@ -106,13 +107,8 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
             )}
           </div>
         </CardContent>
-        <CardFooter>
-          <Button isLoading={isLoading}>Change username</Button>
-        </CardFooter>
-      </Card>
-      <Card>
         <CardHeader>
-          <CardTitle>Your Name</CardTitle>
+          <CardTitle>Full Name</CardTitle>
           <CardDescription>
             Please enter a Full name you are comfortable with.
           </CardDescription>
@@ -120,16 +116,16 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
         <CardContent>
           <div className='relative grid gap-1'>
             <div className='absolute top-0 left-0 w-8 h-10 grid place-items-center'>
-              <span className='text-sm text-zinc-400'>u/</span>
+              <span className='text-sm text-zinc-400'></span>
             </div>
-            <Label className='sr-only' htmlFor='name'>
+            <Label className='sr-only' htmlFor='fname'>
               Name
             </Label>
             <Input
-              id='name'
+              id='fname'
               className='w-[400px] pl-6'
               size={32}
-              {...register('name')}
+              {...register('fname')}
             />
             {errors?.name && (
               <p className='px-1 text-xs text-red-600'>{errors.name.message}</p>
@@ -137,7 +133,7 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
           </div>
         </CardContent>
         <CardFooter>
-          <Button isLoading={isLoading}>Change name</Button>
+          <Button isLoading={isLoading}>Save</Button>
         </CardFooter>
       </Card>
     </form>

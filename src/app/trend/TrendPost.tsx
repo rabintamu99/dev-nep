@@ -9,6 +9,7 @@ import { Loader2 } from 'lucide-react'
 import { FC, useEffect, useRef } from 'react'
 import Post from '@/components/Post'
 import { useSession } from 'next-auth/react'
+import dynamic from "next/dynamic";
 
 interface TrendPostProps {
   initialPosts: ExtendedPost[]
@@ -27,7 +28,7 @@ const TrendPost: FC<TrendPostProps> = ({ initialPosts, subredditName }) => {
     ['infinite-query'],
     async ({ pageParam = 1 }) => {
       const query =
-        `/api/posts?limit=${INFINITE_SCROLL_PAGINATION_RESULTS}&page=${pageParam}` +
+        `/api/posts?sort=votes&order=desc&limit=${INFINITE_SCROLL_PAGINATION_RESULTS}&page=${pageParam}` +
         (!!subredditName ? `&subredditName=${subredditName}` : '')
 
       const { data } = await axios.get(query)
@@ -116,4 +117,5 @@ const TrendPost: FC<TrendPostProps> = ({ initialPosts, subredditName }) => {
   )
 }
 
-export default TrendPost
+export default dynamic (() => Promise.resolve(TrendPost), {ssr: false})
+
