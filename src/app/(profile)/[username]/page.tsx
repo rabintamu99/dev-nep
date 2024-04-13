@@ -35,21 +35,6 @@ return (
 
 {/* Middle Content */}
 <div className='md:col-span-4'>
-{/* <div className='flex items-center gap-2 mb-2'>
-  <Link className="bg-white text-gray-500 border  rounded-full flex items-center px-3 py-1 hover:shadow-lg active:shadow-sm transition-all " href={`/`}>
-       <HomeIcon className="mr-2 h-4 w-4" />
-       <span>Feed</span>
-  </Link>
-  <Link className="bg-white text-black border border-gray-300 shadow-sm rounded-full flex items-center px-3 py-1 hover:shadow-lg active:shadow-sm transition-all" href={`/trend`}>
-        <TrendingUpIcon className="mr-2 h-4 w-4" />
-       <span>Trend</span>
-  </Link>
-  <Link className="bg-white text-black border border-gray-300 shadow-sm rounded-full flex items-center px-3 py-1 hover:shadow-lg active:shadow-sm transition-all" href={`/ask`}>
-        <ShieldQuestion className="mr-2 h-4 w-4" />
-       <span>Ask</span>
-  </Link>
-  </div> */}
-
 <div className="bg-white p-3 rounded-lg shadow-md max-w-2xl mx-auto">
     {/* User Info Section */}
     <div className="flex items-center space-x-4">

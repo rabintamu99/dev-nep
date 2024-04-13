@@ -1,49 +1,49 @@
-// app/follow/[userId]/page.jsx
-'use client';
 
-import { useSession } from 'next-auth/react';
-import { useState } from 'react';
+// 'use client';
 
-export default function FollowPage({ params }) {
-  const { userId } = params;
-  const { data: session } = useSession();
-  const [isFollowing, setIsFollowing] = useState(null);
+// import { useSession } from 'next-auth/react';
+// import { useState } from 'react';
 
-  const followUser = async () => {
-    'use server';
+// export default function FollowPage({ params }) {
+//   const { userId } = params;
+//   const { data: session } = useSession();
+//   const [isFollowing, setIsFollowing] = useState(null);
 
-    try {
-      // Connect to your database and update the follow relationship
-      // You can use a database library like Prisma or MongoDB client
+//   const followUser = async () => {
+//     // 'use server';
 
-      setIsFollowing(true);
-    } catch (error) {
-      console.error('Error following user:', error);
-    }
-  };
+//     try {
+//       // Connect to your database and update the follow relationship
+//       // You can use a database library like Prisma or MongoDB client
 
-  const unfollowUser = async () => {
-    'use server';
+//       setIsFollowing(true);
+//     } catch (error) {
+//       console.error('Error following user:', error);
+//     }
+//   };
 
-    try {
-      // Connect to your database and remove the follow relationship
-      // You can use a database library like Prisma or MongoDB client
+//   const unfollowUser = async () => {
+//     // 'use server';
 
-      setIsFollowing(false);
-    } catch (error) {
-      console.error('Error unfollowing user:', error);
-    }
-  };
+//     try {
+//       // Connect to your database and remove the follow relationship
+//       // You can use a database library like Prisma or MongoDB client
 
-  return (
-    <div>
-      {isFollowing === null ? (
-        <p>Loading...</p>
-      ) : isFollowing ? (
-        <button onClick={unfollowUser}>Unfollow</button>
-      ) : (
-        <button onClick={followUser}>Follow</button>
-      )}
-    </div>
-  );
-}
+//       setIsFollowing(false);
+//     } catch (error) {
+//       console.error('Error unfollowing user:', error);
+//     }
+//   };
+
+//   return (
+//     <div>
+//       {isFollowing === null ? (
+//         <p>Loading...</p>
+//       ) : isFollowing ? (
+//         <button onClick={unfollowUser}>Unfollow</button>
+//       ) : (
+//         <button onClick={followUser}>Follow</button>
+//       )}
+//     </div>
+//   );
+// }
