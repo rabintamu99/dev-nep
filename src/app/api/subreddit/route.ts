@@ -13,6 +13,9 @@ export async function POST(req: Request) {
 
     const body = await req.json()
     const { name } = SubredditValidator.parse(body)
+    const { about } = SubredditValidator.parse(body)
+
+    console.log(about);
 
     // check if subreddit already exists
     const subredditExists = await db.subreddit.findFirst({
@@ -29,6 +32,7 @@ export async function POST(req: Request) {
     const subreddit = await db.subreddit.create({
       data: {
         name,
+        about,
         creatorId: session.user.id,
       },
     })

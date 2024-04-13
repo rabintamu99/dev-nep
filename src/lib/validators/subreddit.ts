@@ -2,6 +2,7 @@ import { z } from 'zod'
 
 export const SubredditValidator = z.object({
   name: z.string().min(3).max(21),
+  about: z.string().min(1).max(50),
 })
 
 export const SubredditSubscriptionValidator = z.object({

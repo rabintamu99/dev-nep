@@ -46,10 +46,16 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
 
   const { mutate: updateUsername, isLoading } = useMutation({
     mutationFn: async ({ name, fname}: FormData) => {
-      const payload: FormData = { name, fname }
+      if (name !== user.username){
+        const payload: FormData = { name, fname }
 
       const { data } = await axios.patch(`/api/username/`, payload)
       return data
+    } else {
+      const payload = { fname }
+      const { data } = await axios.patch(`/api/username/`, payload)
+      return  data
+    }
     },
     onError: (err) => {
       if (err instanceof AxiosError) {
@@ -64,13 +70,13 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
 
       return toast({
         title: 'Something went wrong.',
-        description: 'Your username was not updated. Please try again.',
+        description: 'Your profile was not updated. Please try again.',
         variant: 'destructive',
       })
     },
     onSuccess: () => {
       toast({
-        description: 'Your username has been updated.',
+        description: 'Your profile has been updated.',
       })
       router.refresh()
     },
@@ -83,15 +89,15 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
       {...props}>
       <Card>
         <CardHeader>
-          <CardTitle>Your username</CardTitle>
+          <CardTitle>Username</CardTitle>
           <CardDescription>
-            Please enter a display name you are comfortable with.
+            Please enter a display username
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className='relative grid gap-1'>
             <div className='absolute top-0 left-0 w-8 h-10 grid place-items-center'>
-              <span className='text-sm text-zinc-400'>u/</span>
+              <span className='text-sm text-zinc-400'></span>
             </div>
             <Label className='sr-only' htmlFor='name'>
               Name
@@ -127,13 +133,13 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
               size={32}
               {...register('fname')}
             />
-            {errors?.name && (
-              <p className='px-1 text-xs text-red-600'>{errors.name.message}</p>
+            {errors?.fname && (
+              <p className='px-1 text-xs text-red-600'>{errors.fname.message}</p>
             )}
           </div>
         </CardContent>
         <CardFooter>
-          <Button isLoading={isLoading}>Save</Button>
+          <Button isLoading={isLoading}>Save Changes</Button>
         </CardFooter>
       </Card>
     </form>

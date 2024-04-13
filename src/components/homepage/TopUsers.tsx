@@ -4,8 +4,10 @@ import Link from 'next/link'
 import { UserAvatar } from '@/components/UserAvatar'
 import { UserIcon } from 'lucide-react';
 import FollowUnfollowButton from '../FollowUnfollowButton';
+import { getAuthSession } from '@/lib/auth';
 
 const TopUser = async () => {
+  const session = await getAuthSession();
   const Users = await db.user.findMany({
     include: {
       _count: {
@@ -45,7 +47,10 @@ const TopUser = async () => {
          </div>
        </div>
        {/* <button className='text-sm outline rounded-full p-1'>follow</button> */}
-       <FollowUnfollowButton targetUserId={user.id} />
+       {session?.user && session.user.id !== user.id && (
+  <FollowUnfollowButton targetUserId={user.id} />
+)}
+
      </div>
    </li>
    

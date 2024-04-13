@@ -3,6 +3,7 @@ import SidebarNav  from '@/components/setting/SidebarNav'
 import { UserNameForm } from '@/components/UserNameForm'
 import { authOptions, getAuthSession } from '@/lib/auth'
 import { UserAvatar } from '@/components/UserAvatar'
+import { Button } from '@/components/ui/Button'
 
 
 export const metadata = {
@@ -24,7 +25,8 @@ export default async function SettingsPage() {
         <h1 className='font-bold text-3xl md:text-4xl'>edit profile</h1>
 
         <div className='grid col-span-3 gap-10'>
-        <UserAvatar
+          <div className='flex gap-4'>
+          <UserAvatar
           user={{
             name: session.user.name || null,
             image: session.user.image || null,
@@ -32,6 +34,8 @@ export default async function SettingsPage() {
           className='h-20  w-20'
         />
         <p className='font-medium text-xl md:text-xl'>change profile picture</p>
+          </div>
+       
           <UserNameForm
             user={{
               id: session.user.id,

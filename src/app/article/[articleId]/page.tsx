@@ -12,6 +12,7 @@ import TopUser from '@/components/homepage/TopUsers';
 import FollowButton from '@/components/FollowUnfollowButton';
 import FollowUnfollowButton from '@/components/FollowUnfollowButton';
 import ArticleComment from '@/components/comments/ArticleComment';
+import CreateComment from '@/components/CreateComment';
 
 export default async function ArticlePage({
     params: { articleId },
@@ -56,6 +57,7 @@ export default async function ArticlePage({
         </h1>
         <EditorOutput  content={article?.content} />
         </div>
+        <CreateComment />
       </div>
       <div>
       <MyCommunities />

@@ -7,6 +7,7 @@ import { FC } from 'react'
 import { Button } from '@/components/ui/Button'
 import { useToast } from '@/hooks/use-toast'
 import { Icons } from './Icons'
+import { GithubIcon } from 'lucide-react'
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -30,6 +31,22 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
     }
   }
 
+  const loginWithGithub = async () => {
+    setIsLoading(true)
+
+    try {
+      await signIn('github')
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'There was an error logging in with Github',
+        variant: 'destructive',
+      })
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
     <div className={cn('flex flex-col justify-center ', className)} {...props}>
       <Button
@@ -46,11 +63,11 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
       <Button
         isLoading={isLoading}
         type='button'
-        size='sm'
-        className='w-full'
-        onClick={loginWithGoogle}
+        size='default'
+        className='w-full my-2 outline'
+        onClick={loginWithGithub}
         disabled={isLoading}>
-        {isLoading ? null : <Icons.google className='h-4 w-4 mr-2' />}
+        {isLoading ? null : <GithubIcon className='h-4 w-4 mr-2' />}
         Continue With Github
       </Button>
     </div>

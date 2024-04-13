@@ -148,7 +148,7 @@ const LikeComponent: React.FC<LikeButtonProps> = ({ articleId, initialCount }) =
   return (
     <div className="flex items-center gap-1">
       <button onClick={toggleLike}>
-        <HeartIcon className={`cursor-pointer ${liked ? 'text-red-500 fill-current' : ''}`} />
+        <HeartIcon className={`cursor-pointer ${liked ? 'text-red-500 fill-current' : ''}h-5 w-5 `} />
       </button>
       <p>{likesCount}</p>
     </div>

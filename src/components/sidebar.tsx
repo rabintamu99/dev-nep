@@ -35,16 +35,16 @@ const items: ISidebarItem[] = [
     path: "/",
     icon: HomeIcon,
   },
-  {
-    name: "Trend",
-    path: "/trend",
-    icon: TrendingUpIcon,
-  },
-  {
-    name: "Ask",
-    path: "/question",
-    icon: MessageCircleQuestionIcon,
-  },
+  // {
+  //   name: "Trend",
+  //   path: "/trend",
+  //   icon: TrendingUpIcon,
+  // },
+  // {
+  //   name: "Ask",
+  //   path: "/question",
+  //   icon: MessageCircleQuestionIcon,
+  // },
   {
     name: "Article",
     path: "/article",
@@ -70,11 +70,11 @@ const items: ISidebarItem[] = [
     path: "/settings",
     icon: Settings2Icon,
   },
-  {
-    name: "Notifications",
-    path: "/setting",
-    icon: BellIcon,
-  },
+  // {
+  //   name: "Notifications",
+  //   path: "/setting",
+  //   icon: BellIcon,
+  // },
 
 
 

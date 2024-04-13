@@ -10,5 +10,4 @@ export const UsernameValidator = z.object({
     .string()
     .min(3)
     .max(32)
-    .regex(/^[a-zA-Z0-9_]+$/),
 })

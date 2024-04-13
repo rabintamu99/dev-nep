@@ -4,11 +4,12 @@ import { formatTimeToNow } from '@/lib/utils'
 import { Post, User, Vote } from '@prisma/client'
 import { MessageCircle, MessageSquare, MessagesSquare } from 'lucide-react'
 import Link from 'next/link'
-import { FC, useRef } from 'react'
+import { FC, useRef,useState,useEffect } from 'react'
 import EditorOutput from './EditorOutput'
 import PostVoteClient from './post-vote/PostVoteClient'
 import { UserAvatar } from './UserAvatar'
 import ShareComponent from './ShareComponent'
+import ShareButton from './ShareComponent'
 
 type PartialVote = Pick<Vote, 'type'>
 
@@ -32,6 +33,15 @@ const Post: FC<PostProps> = ({
 }) => {
   const pRef = useRef<HTMLParagraphElement>(null)
 
+  const postUrl = `/r/${subredditName}/post/${post.id}`;
+
+    const [fullUrl, setFullUrl] = useState('');
+  
+    useEffect(() => {
+      // This code will only run on the client-side
+      setFullUrl(window.location.origin + postUrl);
+    }, [postUrl]);
+  
   return (
     <div className='flex flex-col rounded-sm bg-white dark:bg-slate-600 dark:border-white  shadow-white'>
       <div className='py-4 flex justify-between'>
@@ -95,7 +105,11 @@ const Post: FC<PostProps> = ({
           className='w-fit flex items-center gap-2'>
           <MessagesSquare className='h-4 w-4' /> {commentAmt} comments
         </Link>
-        <ShareComponent />
+        <ShareButton
+                title={post.title}
+                text={String(post.content)}  
+                url={fullUrl}
+            />
       </div>
     </div>
   )

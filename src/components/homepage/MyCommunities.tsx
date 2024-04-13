@@ -40,8 +40,8 @@ const Community = async () => {
             <span className='font-medium text-gray-400 mr-2'>#{index + 1}</span> {/* Display ranking */}
             {/* <UsersIcon className='h-4 w-4'/> */}
             <span className=' font-medium text-lg text-right'>{subreddit.name}</span>
-            <span className='text-zinc-400  font-medium text-sm text-right'>{subreddit._count.posts} posts</span>
-            <span className='text-zinc-400  font-medium text-sm text-right'>{subreddit._count.subscribers} member</span>
+            {/* <span className='text-zinc-400  font-medium text-sm text-right'>{subreddit._count.posts} posts</span>
+            <span className='text-zinc-400  font-medium text-sm text-right'>{subreddit._count.subscribers} member</span> */}
           </p>
       
         </Link>

@@ -1,7 +1,7 @@
 
 import { db } from '@/lib/db';
 import { formatTimeToNow } from '@/lib/utils';
-import {  MessageCircle, MessageCircleIcon, MessageSquareIcon, ReplyIcon, ShareIcon } from 'lucide-react';
+import {  MessageCircle, MessageCircleIcon, MessageSquareIcon, MessagesSquare, ReplyIcon, ShareIcon } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/Card';
 import { UserAvatar } from './UserAvatar';
 import LikeComponent from './LikeComponent';
@@ -56,8 +56,7 @@ const Page = async () => {
             </div>
         </div>
         <div className='flex items-center'>
-      {/* @ts-expect-error server component */}
-        {/* <SaveComponent /> */}
+
        </div>   
   </div>
       
@@ -69,14 +68,13 @@ const Page = async () => {
   </CardContent>
   <CardFooter className='flex items-center justify-between mt-8 border-t-2 border-zinc-100 pb-0'>
    
-    <div className='flex gap-2 items-center mt-2 '>
+    <div className='flex gap-4 items-center mt-2 '>
     
       <LikeComponent articleId={article.id} initialCount={article.likes_count} />
-      <MessageCircle className='h-7 w-7 p-1 bg-zinc-100 rounded-full'/>
-    <p> comment</p>
+      <div className='flex gap-1 items-center'><MessagesSquare className='h-4 w-4'/><p>comment</p></div>
     </div>
     <div className='flex gap-4 items-center mt-2'>
-     
+      {/* @ts-expect-error server component */}
      <ShareComponent />
     </div>
 
