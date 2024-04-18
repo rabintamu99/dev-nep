@@ -35,7 +35,7 @@ const Community = async () => {
   <ul>
     {subreddit.map((subreddit, index) => (
       <li key={subreddit.id} className='text-zinc-900 dark:text-white text-xl px-2 py-2 rounded-sm hover:bg-slate-100'>
-        <Link href={`/r/${subreddit.name}`}>
+        <Link href={`/c/${subreddit.name}`}>
           <p className='flex items-center gap-1.5'>
             <span className='font-medium text-gray-400 mr-2'>#{index + 1}</span> {/* Display ranking */}
             {/* <UsersIcon className='h-4 w-4'/> */}

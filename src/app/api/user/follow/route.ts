@@ -44,7 +44,13 @@ export async function POST(req: Request) {
       },
     });
 
-    return new Response(JSON.stringify({ success: true, followingId }), {
+    const followersCount = await db.follows.count({
+      where: {
+        followingId: followingId,
+      },
+    });
+
+    return new Response(JSON.stringify({ success: true, followingId, followersCount }), {
       status: 200,
       headers: {
         'Content-Type': 'application/json',

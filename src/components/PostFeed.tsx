@@ -52,11 +52,10 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName }) => {
 
   return (
     <ul className='flex flex-col col-span-2 space-y-6'>
-      {posts.map((post, index) => {
+    {posts.length > 0 ? (
+      posts.map((post, index) => {
         const votesAmt = post.votes.reduce((acc, vote) => {
-          if (vote.type === 'UP') return acc + 1
-          if (vote.type === 'DOWN') return acc - 1
-          return acc
+          return acc + (vote.type === 'UP' ? 1 : vote.type === 'DOWN' ? -1 : 0)
         }, 0)
 
         const currentVote = post.votes.find(
@@ -64,7 +63,6 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName }) => {
         )
 
         if (index === posts.length - 1) {
-          // Add a ref to the last post in the list
           return (
             <li key={post.id} ref={ref}>
               <Post
@@ -88,15 +86,25 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName }) => {
             />
           )
         }
-      })}
+      })
+    ) : (
+      <section className="flex h-[70vh] items-center justify-center">
+      <div className="text-center space-y-4">
+        <h2 className="text-2xl font-bold">No Posts Available</h2>
+        <p className="text-gray-500 dark:text-gray-400">It looks like there are no posts to display at the moment.</p>
+        <p className="text-gray-500 dark:text-gray-400">Join Circle</p>
+      </div>
+    </section>
+    )}
 
-      {isFetchingNextPage && (
-        <li className='flex justify-center'>
-          <Loader2 className='w-6 h-6 text-zinc-500 animate-spin' />
-        </li>
-      )}
-    </ul>
-  )
+    {isFetchingNextPage && (
+      <li className='flex justify-center'>
+        <Loader2 className='w-6 h-6 text-zinc-500 animate-spin' />
+      </li>
+    )}
+  </ul>
+)
 }
+
 
 export default PostFeed

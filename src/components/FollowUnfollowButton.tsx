@@ -1,80 +1,11 @@
-// // "@/components/ui/FollowUnfollowButton.tsx"
 "use client";
-
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
-// import { Button } from '@/components/ui/Button';
-// import { useSession } from 'next-auth/react';
-
-// interface FollowUnfollowButtonProps {
-//   targetUserId: string; // The ID of the user to follow/unfollow
-// }
-
-// const FollowUnfollowButton: React.FC<FollowUnfollowButtonProps> = ({ targetUserId }) => {
-//   const { data: session } = useSession();
-//   const [isFollowing, setIsFollowing] = useState(false);
-
-//   useEffect(() => {
-//     // Check if the current user is following the target user
-//     const checkFollowStatus = async () => {
-//       try {
-//         const response = await axios.get(`/api/user/follow/status`, {
-//           params: { followingId: targetUserId }
-//         });
-//         setIsFollowing(response.data.isFollowing);
-//       } catch (error) {
-//         console.error('Error checking follow status', error);
-//       }
-//     };
-
-//     if (session) {
-//       checkFollowStatus();
-//     }
-//   }, [session, targetUserId]);
-
-//   const handleFollow = async () => {
-//     try {
-//       await axios.post('/api/user/follow', { followingId: targetUserId });
-//       setIsFollowing(true);
-//     } catch (error) {
-//       console.error('Error following user', error);
-//     }
-//   };
-
-//   const handleUnfollow = async () => {
-//     try {
-//       await axios.post('/api/user/unfollow', { followingId: targetUserId });
-//       setIsFollowing(false);
-//     } catch (error) {
-//       console.error('Error unfollowing user', error);
-//     }
-//   };
-
-//   if (!session) {
-//     return <Button disabled>Follow</Button>;
-//   }
-
-//   return (
-//     <Button onClick={isFollowing ? handleUnfollow : handleFollow}>
-//       {isFollowing ? 'Unfollow' : 'Follow'}
-//     </Button>
-//   );
-// };
-
-// export default FollowUnfollowButton;
-
-
-
-
-
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button } from '@/components/ui/Button';
 import { useSession } from 'next-auth/react';
 
 interface FollowUnfollowButtonProps {
-  targetUserId: string;
+  targetUserId?: string;
 }
 
 const FollowUnfollowButton: React.FC<FollowUnfollowButtonProps> = ({ targetUserId }) => {

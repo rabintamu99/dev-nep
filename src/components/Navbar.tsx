@@ -40,7 +40,7 @@ const Navbar = async () => {
         <PenBoxIcon className='h-6 w-6' />
           </Link>
         <BellIcon className='h-6 w-6'/>
-        {/* <ModeToggle  /> */}
+        <ModeToggle  />
            {/* actions */}
            {session?.user ? (
           <UserAccountNav user={session.user} />

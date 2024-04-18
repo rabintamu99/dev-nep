@@ -33,7 +33,7 @@ const Post: FC<PostProps> = ({
 }) => {
   const pRef = useRef<HTMLParagraphElement>(null)
 
-  const postUrl = `/r/${subredditName}/post/${post.id}`;
+  const postUrl = `/c/${subredditName}/post/${post.id}`;
 
     const [fullUrl, setFullUrl] = useState('');
   
@@ -44,13 +44,8 @@ const Post: FC<PostProps> = ({
   
   return (
     <div className='flex flex-col rounded-sm bg-white dark:bg-slate-600 dark:border-white  shadow-white'>
-      <div className='py-4 flex justify-between'>
-        <PostVoteClient
-          postId={post.id}
-          initialVotesAmt={_votesAmt}
-          initialVote={_currentVote?.type}
-        />
-
+      <div className='py-4 px-6 flex justify-between'>
+      
         <div className='w-0 flex-1'>
           <div className='max-h-50 mt-1 text-xs text-gray-500'>
             <div className='flex justify-start gap-2 items-center'>
@@ -69,7 +64,7 @@ const Post: FC<PostProps> = ({
                <span>Posted in </span>
                 <a
                   className=' text-zinc-900 dark:text-white dark:bg-slate-800 text-sm underline-offset-2'
-                  href={`/r/${subredditName}`}>
+                  href={`/c/${subredditName}`}>
                   circle/{subredditName}
                 </a>
                 <span className='px-1'>•</span>
@@ -78,7 +73,7 @@ const Post: FC<PostProps> = ({
     
             {formatTimeToNow(new Date(post.createdAt))}
           </div>
-          <a href={`/r/${subredditName}/post/${post.id}`}>
+          <a href={`/c/${subredditName}/post/${post.id}`}>
             <h1 className='text-lg font-semibold py-4 leading-6 text-gray-900 dark:text-white'>
               {post.title}
             </h1>
@@ -98,13 +93,20 @@ const Post: FC<PostProps> = ({
           </div>
         </div>
       </div>
-
+   
       <div className='flex justify-between bg-gray-80 dark:bg-slate-800 z-20 text-sm px-4  py-4 sm:px-6'>
-        <Link
-          href={`/r/${subredditName}/post/${post.id}`}
+    <div className='flex items-center'>
+    <PostVoteClient
+          postId={post.id}
+          initialVotesAmt={_votesAmt}
+          initialVote={_currentVote?.type}
+        />
+          <Link
+          href={`/c/${subredditName}/post/${post.id}`}
           className='w-fit flex items-center gap-2'>
           <MessagesSquare className='h-4 w-4' /> {commentAmt} comments
         </Link>
+    </div>
         <ShareButton
                 title={post.title}
                 text={String(post.content)}  
