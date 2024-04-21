@@ -59,7 +59,7 @@ model User {
   accounts    Account[]
   sessions    Session[]
   Post        Post[]
-  Article        Article[]
+  Article     Article[]
   Comment     Comment[]
   CommentVote CommentVote[]
   Question     Question[]

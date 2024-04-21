@@ -25,7 +25,6 @@ export default async function Article() {
 
     {/* Middle Content */}
     <div className='md:col-span-4'>
-  {/* @ts-expect-error server component */}
   <ArticleFeed />
      
     </div>

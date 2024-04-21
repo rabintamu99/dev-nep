@@ -23,30 +23,31 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName }) => {
   })
   const { data: session } = useSession()
 
-  const { data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
-    ['infinite-query'],
-    async ({ pageParam = 1 }) => {
-      const query =
-        `/api/posts?limit=${INFINITE_SCROLL_PAGINATION_RESULTS}&page=${pageParam}` +
-        (!!subredditName ? `&subredditName=${subredditName}` : '')
+ // Additional error handling and refined intersection observer setup
+const { data, fetchNextPage, isFetchingNextPage, isError, error } = useInfiniteQuery(
+  ['infinite-query-posts', subredditName], // including subredditName to uniquely identify queries
+  async ({ pageParam = 1 }) => {
+    const query = `/api/posts?limit=${INFINITE_SCROLL_PAGINATION_RESULTS}&page=${pageParam}` +
+                  (subredditName ? `&subredditName=${subredditName}` : '');
+    const { data } = await axios.get(query);
+    return data as ExtendedPost[];
+  },
+  {
+    getNextPageParam: (lastPage, pages) => pages.length + 1,
+    initialData: { pages: [initialPosts], pageParams: [1] },
+  }
+);
 
-      const { data } = await axios.get(query)
-      return data as ExtendedPost[]
-    },
+useEffect(() => {
+  if (entry?.isIntersecting && !isFetchingNextPage) {
+    fetchNextPage();
+  }
+}, [entry, fetchNextPage, isFetchingNextPage]);
 
-    {
-      getNextPageParam: (_, pages) => {
-        return pages.length + 1
-      },
-      initialData: { pages: [initialPosts], pageParams: [1] },
-    }
-  )
-
-  useEffect(() => {
-    if (entry?.isIntersecting) {
-      fetchNextPage() // Load more posts when the last post comes into view
-    }
-  }, [entry, fetchNextPage])
+// Error handling in UI
+if (isError) {
+  return <div>Error</div>;
+}
 
   const posts = data?.pages.flatMap((page) => page) ?? initialPosts
 

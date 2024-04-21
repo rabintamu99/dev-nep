@@ -1,5 +1,6 @@
 
 import { UserAvatar } from "@/components/UserAvatar";
+import { db } from '@/lib/db';
 import { Badge } from "@/components/ui/badge"
 import getUser from "@/lib/getUser";
 import { CalendarIcon, CheckCircle2Icon, CircleDashed, ClockIcon, ExternalLinkIcon, GithubIcon, LinkedinIcon, LocateIcon, LucideGithub, MapPinIcon, PlayIcon, SmileIcon, TicketCheckIcon, TwitterIcon, XIcon } from "lucide-react";
@@ -13,6 +14,7 @@ import TopUser from "@/components/homepage/TopUsers";
 import FollowUnfollowButton from "@/components/FollowUnfollowButton";
 import { Session } from "inspector";
 import * as Tabs from '@radix-ui/react-tabs';
+import ArticleComponent from "@/components/Article";
 export default async function profilePage({
   params: { username },
 }: {
@@ -20,7 +22,25 @@ export default async function profilePage({
 }) {
 
  const user = await getUser(username);
+
  const session = await getAuthSession();
+
+  // Fetch articles related to the user
+  const articles = await db.article.findMany({
+    where: { author: { username: username } },
+    include: {
+      author: true,
+      likes: true,
+    },
+    orderBy: {
+      createdAt: 'desc'
+    }
+  });
+
+  console.log(articles);
+  // return {
+  //   props: { user, session, articles },
+  // };
 
 
 return (
@@ -116,16 +136,17 @@ return (
       {/* ... */}
     </div>
   </div>
+  <div className="pt-5">
+  <ArticleComponent  articles={articles} />
+  </div>
 </div>
 
 {/* Right Sidebar */}
 <div className='md:col-span-2'>
 
-      {/* @ts-expect-error server component */}
+ 
       <MyCommunities />
  
-
-      {/* @ts-expect-error server component */}
       <TopUser />
   
 </div>
