@@ -7,7 +7,7 @@ import { CalendarIcon, CheckCircle2Icon, CircleDashed, ClockIcon, ExternalLinkIc
 
 import { getAuthSession } from '@/lib/auth';
 import { Button } from "@/components/ui/Button";
-import Sidebar from "@/components/Sidebar";
+import Sidebar from "@/components/SidebarComponent";
 import ProfileComponent from "@/components/ProfileComponent";
 import MyCommunities from "@/components/homepage/MyCommunities";
 import TopUser from "@/components/homepage/TopUsers";

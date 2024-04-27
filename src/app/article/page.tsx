@@ -2,7 +2,7 @@
 import ArticleFeed from '@/components/ArticleFeed'
 import GeneralFeed from '@/components/homepage/GeneralFeed'
 import TopArticles from '@/components/homepage/TopArticles'
-import Sidebar from '@/components/Sidebar'
+import Sidebar from '@/components/SidebarComponent'
 import TopUser from '@/components/homepage/TopUsers'
 import { getAuthSession } from '@/lib/auth'
 import { HomeIcon, ShieldQuestion, TrendingUpIcon, UserIcon } from 'lucide-react'

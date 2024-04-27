@@ -6,7 +6,7 @@ import { CalendarIcon, CheckCircle2Icon, CircleDashed, ClockIcon, ExternalLinkIc
 
 import { getAuthSession } from '@/lib/auth';
 import { Button } from "@/components/ui/Button";
-import Sidebar from "@/components/Sidebar";
+import Sidebar from "@/components/SidebarComponent";
 
 
 export default async function profilePage({
