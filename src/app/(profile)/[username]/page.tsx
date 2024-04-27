@@ -36,8 +36,6 @@ export default async function profilePage({
       createdAt: 'desc'
     }
   });
-
-  console.log(articles);
   // return {
   //   props: { user, session, articles },
   // };
@@ -137,7 +135,7 @@ return (
     </div>
   </div>
   <div className="pt-5">
-  <ArticleComponent  articles={articles} />
+  <ArticleComponent key={articles}  articles={articles} />
   </div>
 </div>
 

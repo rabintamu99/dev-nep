@@ -13,12 +13,15 @@ import FollowButton from '@/components/FollowUnfollowButton';
 import FollowUnfollowButton from '@/components/FollowUnfollowButton';
 import ArticleComment from '@/components/comments/ArticleComment';
 import CreateComment from '@/components/CreateComment';
+import { getAuthSession } from '@/lib/auth';
 
 export default async function ArticlePage({
     params: { articleId },
   }: {
     params: { articleId: string }
   }) {
+
+    const session = await getAuthSession();
     
     const article = await db.article.findUnique({
         where: {
@@ -47,7 +50,8 @@ export default async function ArticlePage({
             </div>
             {/* <button  className='outline p-2 rounded-sm ml-4 text-zinc-600 text-sm shadow-md'>Follow</button> */}
             <div className='ml-4'>
-              <FollowUnfollowButton targetUserId={article?.authorId}  />
+            {session?.user && session.user.id !== article?.authorId && (
+             <FollowUnfollowButton targetUserId={article?.authorId} />)}
             </div>
        
         </div>

@@ -1,7 +1,7 @@
 
 import ArticleFeed from '@/components/ArticleFeed'
 import GeneralFeed from '@/components/homepage/GeneralFeed'
-import MyCommunities from '@/components/homepage/MyCommunities'
+import TopArticles from '@/components/homepage/TopArticles'
 import Sidebar from '@/components/Sidebar'
 import TopUser from '@/components/homepage/TopUsers'
 import { getAuthSession } from '@/lib/auth'
@@ -33,7 +33,7 @@ export default async function Article() {
     <div className='md:col-span-2'>
     
           {/* @ts-expect-error server component */}
-          <MyCommunities />
+          <TopArticles />
      
 
           {/* @ts-expect-error server component */}
