@@ -12,7 +12,7 @@ import ShareComponent from './ShareComponent';
 interface Article {
   id: string;
   title: string;
-  content: string;
+  content: string | null;
   author: { name: string; username: string; image: string };
   createdAt: Date;
   likes_count: number;
