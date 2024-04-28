@@ -2,7 +2,7 @@
 
 'use client'
 import axios from 'axios'
-import { BookmarkCheckIcon, BookmarkIcon, StarIcon } from 'lucide-react'
+import {  BookmarkIcon } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 
 type Props = {

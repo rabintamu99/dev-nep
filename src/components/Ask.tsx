@@ -20,48 +20,41 @@ const Page = async () => {
       },
     });
   return (
-
-    
-    <div className="max-w-2xl mx-auto my-7 rounded-lg shadow-md">
- {questions.map((question) => (
-<Card className='my-3'>
-<CardHeader className='flex justify-between px-4 py-6'>
-        <div className="flex items-center">
+<div className="max-w-2xl mx-auto my-7 rounded-lg shadow-md">
+    {questions.map((question) => (
+      <Card key={question.id} className='my-3'> 
+        <CardHeader className='flex justify-between px-4 py-6'>
+          <div className="flex items-center">
             <UserAvatar
-                user={{ name: question.author.name || 'Unnamed User', image: question.author.image || '/default-avatar.png' }}
-                className='h-10 w-10 mx-2'
+              user={{ name: question.author.name || 'Unnamed User', image: question.author.image || '/default-avatar.png' }}
+              className='h-10 w-10 mx-2'
             />
             <div>
-                <CardTitle>{question.author.name} <span className='text-zinc-400 text-sm'>@{question.author.username}</span></CardTitle>
-                <CardDescription>posted {formatTimeToNow(question.createdAt)}</CardDescription>
+              <CardTitle>{question.author.name} <span className='text-zinc-400 text-sm'>@{question.author.username}</span></CardTitle>
+              <CardDescription>posted {formatTimeToNow(question.createdAt)}</CardDescription>
             </div>
-        </div>
-    </CardHeader>
-  <CardContent>
-  <a href={`/question/${question.id}`}>
-    <p> {question.text}</p>
-    </a>
-  </CardContent>
-  <CardFooter className='justify-between'>
-   
-    <div className='flex gap-2 items-center'>
-      <LikeButton />
-      <ReplyIcon className='h-7 w-7 p-1 bg-zinc-100 rounded-full'/>
-    <p> answer</p>
-    </div>
-    <div className='flex gap-4 items-center'>
-        {/* @ts-expect-error server component */}
-     <SaveComponent />
-     <ShareIcon />
-    </div>
-
-  </CardFooter>
-</Card>
-
-  ))}
-</div>
-
-  );
-};
+          </div>
+        </CardHeader>
+        <CardContent>
+          <a href={`/question/${question.id}`}>
+            <p>{question.text}</p>
+          </a>
+        </CardContent>
+        <CardFooter className='justify-between'>
+          <div className='flex gap-2 items-center'>
+            <LikeButton />
+            <ReplyIcon className='h-7 w-7 p-1 bg-zinc-100 rounded-full'/>
+            <p>answer</p>
+          </div>
+          <div className='flex gap-4 items-center'>
+            {/* @ts-expect-error server component */}
+            <SaveComponent />
+            <ShareIcon />
+          </div>
+        </CardFooter>
+      </Card>
+    ))}
+  </div>
+)};
 
 export default Page;

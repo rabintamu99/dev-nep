@@ -20,7 +20,6 @@ export const fetchArticles = async (page: number): Promise<Article[] | null> => 
     return articles as Article[];
     
   } catch (error) {
-    console.error("Error fetching articles:", error);
     return null; // Return null to signify an error occurred
   }
 };

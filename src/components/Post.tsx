@@ -8,7 +8,6 @@ import { FC, useRef,useState,useEffect } from 'react'
 import EditorOutput from './EditorOutput'
 import PostVoteClient from './post-vote/PostVoteClient'
 import { UserAvatar } from './UserAvatar'
-import ShareComponent from './ShareComponent'
 import ShareButton from './ShareComponent'
 
 type PartialVote = Pick<Vote, 'type'>
@@ -107,11 +106,11 @@ const Post: FC<PostProps> = ({
           <MessagesSquare className='h-4 w-4' /> {commentAmt} comments
         </Link>
     </div>
-        <ShareButton
+        {/* <ShareButton
                 title={post.title}
                 text={String(post.content)}  
                 url={fullUrl}
-            />
+            /> */}
       </div>
     </div>
   )
