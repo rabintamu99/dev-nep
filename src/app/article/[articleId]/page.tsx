@@ -1,17 +1,12 @@
 
 import { db } from '@/lib/db';
 import { formatTimeToNow } from '@/lib/utils';
-import {  CircleEllipsisIcon, CircleFadingPlus, CircleFadingPlusIcon, ReplyIcon, ShareIcon } from 'lucide-react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card';
+import { CardDescription, CardTitle } from '@/components/ui/Card';
 import { UserAvatar } from '@/components/UserAvatar';
-import LikeButton from '@/components/LikeButton';
-import SaveComponent from '@/components/SaveComponent';
 import EditorOutput from '@/components/EditorOutput';
 import MyCommunities from '@/components/homepage/MyCommunities';
 import TopUser from '@/components/homepage/TopUsers';
-import FollowButton from '@/components/FollowUnfollowButton';
 import FollowUnfollowButton from '@/components/FollowUnfollowButton';
-import ArticleComment from '@/components/comments/ArticleComment';
 import CreateComment from '@/components/CreateComment';
 import { getAuthSession } from '@/lib/auth';
 

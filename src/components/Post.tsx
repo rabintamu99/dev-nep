@@ -2,13 +2,13 @@
 
 import { formatTimeToNow } from '@/lib/utils'
 import { Post, User, Vote } from '@prisma/client'
-import { MessageCircle, MessageSquare, MessagesSquare } from 'lucide-react'
+import { MessagesSquare } from 'lucide-react'
 import Link from 'next/link'
 import { FC, useRef,useState,useEffect } from 'react'
 import EditorOutput from './EditorOutput'
 import PostVoteClient from './post-vote/PostVoteClient'
 import { UserAvatar } from './UserAvatar'
-import ShareButton from './ShareComponent'
+
 
 type PartialVote = Pick<Vote, 'type'>
 

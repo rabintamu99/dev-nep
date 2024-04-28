@@ -1,10 +1,7 @@
 
 import { db } from '@/lib/db';
 import { formatTimeToNow } from '@/lib/utils';
-import { addQuestion } from '@/actions/actions';
-
-import PostAsk from './PostAsk';
-import { BookmarkIcon, HeartIcon, MessageCircle, MessageCircleIcon, ReplyIcon, Share2Icon, ShareIcon } from 'lucide-react';
+import { ReplyIcon, ShareIcon } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/Card';
 import { UserAvatar } from './UserAvatar';
 import SaveComponent from './SaveComponent';
