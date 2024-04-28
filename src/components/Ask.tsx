@@ -7,7 +7,6 @@ import PostAsk from './PostAsk';
 import { BookmarkIcon, HeartIcon, MessageCircle, MessageCircleIcon, ReplyIcon, Share2Icon, ShareIcon } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/Card';
 import { UserAvatar } from './UserAvatar';
-import LikeButton from './LikeButton';
 import SaveComponent from './SaveComponent';
 
 const Page = async () => {
@@ -42,7 +41,6 @@ const Page = async () => {
         </CardContent>
         <CardFooter className='justify-between'>
           <div className='flex gap-2 items-center'>
-            <LikeButton />
             <ReplyIcon className='h-7 w-7 p-1 bg-zinc-100 rounded-full'/>
             <p>answer</p>
           </div>
