@@ -137,7 +137,6 @@ const LikeComponent: React.FC<LikeButtonProps> = ({ articleId, initialCount }) =
         localStorage.setItem(`liked-${articleId}`, JSON.stringify(!newLikedState));
       }
     } catch (error) {
-      console.error("Error toggling like:", error);
       // Revert the like state and count in case of an error
       setLiked(!newLikedState);
       setLikesCount(likesCount);
