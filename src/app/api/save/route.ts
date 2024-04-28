@@ -14,8 +14,6 @@ export async function POST(request: NextRequest) {
 
   try {
     const { questionId } = await request.json();
-
-    console.log(questionId)
     const questionExist = await db.question.findUnique({
       where: {
         id: questionId,
@@ -52,7 +50,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(saveQuestion);
     }
   } catch (error) {
-    console.error('Error:', error);
+  
     // Improved error response to the client
     return NextResponse.json({ error: 'An error occurred while processing your request' }, { status: 500 });
   }

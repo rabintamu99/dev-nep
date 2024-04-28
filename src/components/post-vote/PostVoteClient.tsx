@@ -9,7 +9,7 @@ import axios, { AxiosError } from 'axios'
 import { useEffect, useState } from 'react'
 import { toast } from '../../hooks/use-toast'
 import { Button } from '../ui/Button'
-import { ArrowBigDown, ArrowBigUp, HeartIcon } from 'lucide-react'
+import { HeartIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 interface PostVoteClientProps {

@@ -7,7 +7,7 @@ import { Button, buttonVariants } from './ui/Button'
 import { UserAccountNav } from './UserAccountNav'
 import SearchBar from './SearchBar'
 import { ModeToggle } from '@/components/ModeToggle'
-import { BellIcon, CalendarPlusIcon, DogIcon, Ghost, HeartHandshakeIcon, MoonIcon, PenBoxIcon } from 'lucide-react'
+import { BellIcon, PenBoxIcon } from 'lucide-react'
 
 const Navbar = async () => {
   const session = await getServerSession(authOptions)

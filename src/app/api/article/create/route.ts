@@ -25,10 +25,10 @@ export async function POST(req: Request) {
           },
         },
       });
-      console.log('Created post:', createdPost);
+      
       return new Response(JSON.stringify(createdPost), { status: 201, headers: { 'Content-Type': 'application/json' } });
     } catch (error) {
-      console.error('Error creating post:', error);
+
       return new Response('Error creating post', { status: 500 });
     }
   } catch (error) {
@@ -36,7 +36,7 @@ export async function POST(req: Request) {
       return new Response(error.message, { status: 400 });
     }
 
-    console.error('Server error:', error);
+
     return new Response('Could not post this time. Please try later', { status: 500 });
   }
 }

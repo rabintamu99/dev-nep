@@ -2,7 +2,6 @@
 'use server';
 import { getAuthSession } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { PostCreationRequest } from "@/lib/validators/post";
 
 export async function createPost({ title, content }: { title: string; content: any }) {
 

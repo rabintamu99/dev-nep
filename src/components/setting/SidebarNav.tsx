@@ -1,19 +1,8 @@
 "use client";
 import {
   LucideIcon,
-  HomeIcon,
-  CalendarCheck2Icon,
-  PenBoxIcon,
-  User2Icon,
-  Settings2Icon,
   UserCircle2Icon,
   Users2Icon,
-  BellElectricIcon,
-  BellIcon,
-  FileIcon,
-  PlusSquareIcon,
-  LockIcon,
-  LucideLock,
 } from "lucide-react";
 import SidebarItem from "@/components/item";
 

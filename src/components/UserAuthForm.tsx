@@ -7,7 +7,7 @@ import { FC } from 'react'
 import { Button } from '@/components/ui/Button'
 import { useToast } from '@/hooks/use-toast'
 import { Icons } from './Icons'
-import { GithubIcon, PowerOffIcon } from 'lucide-react'
+import { PowerOffIcon } from 'lucide-react'
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 

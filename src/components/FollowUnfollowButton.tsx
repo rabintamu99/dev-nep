@@ -24,7 +24,6 @@ const FollowUnfollowButton: React.FC<FollowUnfollowButtonProps> = ({ targetUserI
         const response = await axios.get(`/api/user/follow/status?followingId=${targetUserId}`);
         setIsFollowing(response.data.isFollowing);
       } catch (error) {
-        console.error('Error checking follow status', error);
       } finally {
         setLoading(false);
       }
@@ -38,7 +37,7 @@ const FollowUnfollowButton: React.FC<FollowUnfollowButtonProps> = ({ targetUserI
       await axios.post('/api/user/follow', { followingId: targetUserId });
       setIsFollowing(true);
     } catch (error) {
-      console.error('Error following user', error);
+
     }
   };
   const handleUnfollow = async () => {
@@ -46,7 +45,7 @@ const FollowUnfollowButton: React.FC<FollowUnfollowButtonProps> = ({ targetUserI
       await axios.post('/api/user/unfollow', { followingId: targetUserId });
       setIsFollowing(false);
     } catch (error) {
-      console.error('Error unfollowing user', error);
+
     }
   };
 
