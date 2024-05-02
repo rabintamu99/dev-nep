@@ -35,8 +35,6 @@ export async function POST(req: Request) {
     if (error instanceof z.ZodError) {
       return new Response(error.message, { status: 400 });
     }
-
-
     return new Response('Could not post this time. Please try later', { status: 500 });
   }
 }

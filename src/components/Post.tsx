@@ -93,16 +93,16 @@ const Post: FC<PostProps> = ({
         </div>
       </div>
    
-      <div className='flex justify-between bg-gray-80 dark:bg-slate-800 z-20 text-sm px-4  py-4 sm:px-6'>
-    <div className='flex items-center'>
+    <div className='flex justify-between bg-gray-80 dark:bg-slate-800 z-0 text-sm px-4'>
+    <div className='flex items-center gap-4 pb-2justify-center'>
     <PostVoteClient
           postId={post.id}
           initialVotesAmt={_votesAmt}
           initialVote={_currentVote?.type}
         />
-          <Link
+        <Link
           href={`/c/${subredditName}/post/${post.id}`}
-          className='w-fit flex items-center gap-2'>
+          className='w-fit flex items-center gap-1'>
           <MessagesSquare className='h-4 w-4' /> {commentAmt} comments
         </Link>
     </div>

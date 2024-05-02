@@ -51,7 +51,7 @@ export default async function ArticlePage({
        
         </div>
         <div className='my-5 p-5 gap-4'>      
-        <h1 className='text-4xl font-semibold mb-5  leading-6 text-gray-900'>
+        <h1 className='text-3xl font-semibold mb-5 text-gray-900'>
           {article?.title }
         </h1>
         <EditorOutput  content={article?.content} />

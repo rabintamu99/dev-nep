@@ -16,7 +16,7 @@ export default async function Home() {
    
       <div className='grid grid-cols-1 md:grid-cols-8 gap-y-4 md:gap-x-6 py-6'>
      {/* Left Sidebar */}
-    <div className='md:col-span-2'>
+    <div className='md:col-span-2 hidden sm:block'>
     
           <Sidebar />
        
@@ -44,7 +44,7 @@ export default async function Home() {
     </div>
 
     {/* Right Sidebar */}
-    <div className='md:col-span-2'>
+    <div className='md:col-span-2 hidden sm:block'>
     
           {/* @ts-expect-error server component */}
           <MyCommunities />

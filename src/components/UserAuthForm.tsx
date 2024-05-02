@@ -7,7 +7,7 @@ import { FC } from 'react'
 import { Button } from '@/components/ui/Button'
 import { useToast } from '@/hooks/use-toast'
 import { Icons } from './Icons'
-import { PowerOffIcon } from 'lucide-react'
+
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -67,7 +67,7 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
         className='w-full my-2 outline'
         onClick={loginWithGithub}
         disabled={isLoading}>
-        {isLoading ? null : <PowerOffIcon className='h-4 w-4 mr-2' />}
+        {isLoading ? null : <Icons.github className='h-4 w-4 mr-2' />}
         Continue With Github
       </Button>
     </div>
