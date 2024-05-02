@@ -54,8 +54,8 @@ export default function ArticleComponent({ articles }: ArticleProps) {
                 <div>
                   <a href={`/${article.author.username}`}>
                     <CardTitle className='text-sm'>{article.author.name} <span className='text-zinc-500 text-sm'>@{article.author.username}</span></CardTitle>
-                    <CardDescription className='text-sm'>posted {formatTimeToNow(article.createdAt)}</CardDescription>
-                  </a>
+                    <CardDescription className='text-sm'> posted {article.createdAt ? formatTimeToNow(article.createdAt) : 'Date not available'}</CardDescription>
+                  </a>                
                 </div>
               </div>
             </div>

@@ -127,7 +127,7 @@ return (
     </div>
   </div>
   <div className="pt-5">
-  <ArticleComponent key={articles[0].id} articles={articles} />
+  <ArticleComponent key={articles.id} articles={articles} />
   </div>
 </div>
 

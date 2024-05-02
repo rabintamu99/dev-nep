@@ -17,7 +17,9 @@ export const fetchArticles = async (page: number): Promise<Article[] | null> => 
           likes: true, // Include likes details
         },
     });
+    console.log(articles)
     return articles as Article[];
+
     
   } catch (error) {
     return null; // Return null to signify an error occurred

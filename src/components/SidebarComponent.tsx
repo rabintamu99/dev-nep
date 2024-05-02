@@ -56,7 +56,7 @@ const items: ISidebarItem[] = [
   },
   {
     name: "Create Circle",
-    path: "/r/create",
+    path: "/c/create",
     icon: PlusSquareIcon,
   },
   {

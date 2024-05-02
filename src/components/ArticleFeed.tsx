@@ -36,7 +36,6 @@ export default function ArticleFeed() {
         setPage(nextPage);
       }
     } catch (error) {
-      console.error("Failed to load more articles:", error);
     } finally {
       setIsLoading(false);
     }
@@ -45,7 +44,6 @@ export default function ArticleFeed() {
   useEffect(() => {
     if (inView) {
       loadMoreArticles();
-      console.log("Loading articles...");
     }
   }, [inView, loadMoreArticles]);
 
