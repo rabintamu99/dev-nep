@@ -30,7 +30,7 @@ export default function RootLayout({
       )}>
         
         
-      <body className='min-h-screen  max-w-8xl pt-8 bg-slate-50 dark:bg-slate-800 antialiased'>
+      <body className='min-h-screen  max-w-8xl pt-8 bg-slate-50 dark:bg-zinc-950 antialiased'>
       <ThemeProvider
             attribute="class"
             defaultTheme="system"

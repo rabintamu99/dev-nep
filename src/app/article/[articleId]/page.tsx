@@ -1,4 +1,3 @@
-
 import { db } from '@/lib/db';
 import { formatTimeToNow } from '@/lib/utils';
 import { CardDescription, CardTitle } from '@/components/ui/Card';
@@ -30,7 +29,7 @@ export default async function ArticlePage({
 
   return (
     <>
-    <div className='h-full flex flex-col gap-3 sm:flex-row items-center sm:items-start justify-between'>
+    <div className='h-full w-3/4 mx-auto mb-5 items-center flex flex-col gap-3 sm:flex-row sm:items-start justify-between'>
 
       <div className='sm:w-0 w-full flex-1 p-5  bg-white rounded-sm'>
       <div className="flex items-center">
@@ -59,9 +58,9 @@ export default async function ArticlePage({
         <CreateComment />
       </div>
       <div>
-      <MyCommunities />
+      {/*<MyCommunities />
       <TopUser />
-
+      */}
       </div>
      
     </div>

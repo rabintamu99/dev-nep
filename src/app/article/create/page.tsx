@@ -21,7 +21,7 @@ const page = () => {
     {/* form */}
     <ArticleEditor />
 
-    <div className='w-full grid items-center my-2 gap-2'>
+    <div className='w-1/4 grid items-center my-2 gap-2'>
     <Button type='submit' variant={'outline'} className='w-full' form='subreddit-post-form'>
         Save Draft 
       </Button>

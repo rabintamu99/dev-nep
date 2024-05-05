@@ -10,6 +10,7 @@ export const ArticleValidator = z.object({
       message: 'Title must be less than 128 characters long',
     }),
   content: z.any(),
+  tags: z.any(),
 })
 
 export type ArticleCreationRequest = z.infer<typeof ArticleValidator>

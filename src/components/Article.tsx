@@ -9,7 +9,7 @@ import LikeComponent from './LikeComponent';
 import SaveComponent from './SaveComponent';
 import EditorOutput from './EditorOutput';
 import ShareComponent from './ShareComponent';
-
+import Tag from './TagComponent';
 interface Article {
   id: string;
   title: string;
@@ -17,12 +17,12 @@ interface Article {
   author: { name: string; username: string; image: string };
   createdAt: Date;
   likes_count: number;
+  tags: string[];
 }
 
 export interface ArticleProps {
   articles: Article[] | null;  // Changed to expect a single Article object
 }
-
 
  export default function ArticleComponent({ articles }: ArticleProps){
 
@@ -30,8 +30,8 @@ return (
   <>
     {articles ? (
       articles.map((article) => (
-        <Card key={article.id} className='mb-2'>
-          <div className='flex items-center justify-between p-4'>
+        <Card key={article.id} className='mb-1'>
+          <div className='flex items-center justify-between px-4'>
         <div>
           <a href={`/article/${article.id}`}>
             <h1 className='text-xl font-semibold py-4 px-4 leading-6 text-gray-600 dark:text-white'>
@@ -44,7 +44,10 @@ return (
             <SaveComponent />
         </div>  
       </div>
-      <CardHeader className='flex px-4 py-2'>
+      <div className="px-6">
+      {article.tags?.map(tag => <Tag key={tag} tag={tag} />)}
+     </div>
+        <CardHeader className='flex px-4 py-2'>
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <div>

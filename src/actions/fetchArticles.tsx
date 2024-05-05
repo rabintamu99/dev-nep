@@ -19,13 +19,19 @@ export const fetchArticles = async (page: number): Promise<Article[] | null> => 
       include: {
         author: true,
         likes: true,
+        tags: true,
       },
     });
 
+    const transformedArticles = articles.map(article => ({
+      ...article,
+      tags: article.tags.map(tag => tag.name)
+  }));
+
+  return transformedArticles as Article[];
     // console.log(`Fetched ${articles.length} articles`);
     // console.log(articles);
-    return articles as Article[];
-    
+
   } catch (error) {
     // console.error('Error fetching articles:', error);
     return null;

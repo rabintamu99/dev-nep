@@ -4,6 +4,7 @@ import TopArticles from '@/components/homepage/TopArticles'
 import Sidebar from '@/components/SidebarComponent'
 import TopUser from '@/components/homepage/TopUsers'
 import { getAuthSession } from '@/lib/auth'
+import Tag from '@/components/homepage/Tag'
 export const dynamic = 'force-dynamic'
 export const fetchCache = 'force-no-store'
 
@@ -25,14 +26,14 @@ export default async function Article() {
     </div>
 
     {/* Right Sidebar */}
-    <div className='md:col-span-2 hidden md:block'>
+    <div className='md:col-span-2  hidden md:block'>
     
           {/* @ts-expect-error server component */}
           <TopArticles />
-     
 
-          {/* @ts-expect-error server component */}
-          <TopUser />
+
+           {/* @ts-expect-error server component */}
+          <Tag />
       
   </div>
   </div>

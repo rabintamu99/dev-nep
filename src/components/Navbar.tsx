@@ -34,11 +34,11 @@ const Navbar = async () => {
 
         {/* Right section with conditional display */}
         <div className='flex gap-6 items-center'>
-          <Link href='/article/create' className='md:flex '>
-            <PenBoxIcon className='h-6 w-6' />
+          <Link href='/article/create' className='md:flex hover:bg-zinc-200 hover:rounded-full p-1 '>
+            <PenBoxIcon className='h-6 w-6 mr-1 ' /> <span>write</span>
           </Link>
           <div className='hidden md:flex gap-6 items-center'>
-            <BellIcon className='h-6 w-6' />
+            <BellIcon className='h-8 w-8 hover:bg-zinc-200 hover:rounded-full p-1' />
             <ModeToggle />
             {/* Conditional rendering based on session */}
             {session?.user ? (

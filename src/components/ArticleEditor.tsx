@@ -1,21 +1,23 @@
 'use client'
-import EditorJS from '@editorjs/editorjs'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { usePathname, useRouter } from 'next/navigation'
-import { useCallback, useEffect, useRef, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import TextareaAutosize from 'react-textarea-autosize'
-import { z } from 'zod'
+import EditorJS from '@editorjs/editorjs';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { usePathname, useRouter } from 'next/navigation';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import TextareaAutosize from 'react-textarea-autosize';
+import TagsInput from 'react-tagsinput';
+import { z } from 'zod';
 
-import { toast } from '@/hooks/use-toast'
-import { uploadFiles } from '@/lib/uploadthing'
-import { ArticleCreationRequest, ArticleValidator } from '@/lib/validators/article'
-import { useMutation } from '@tanstack/react-query'
-import axios from 'axios'
+import { toast } from '@/hooks/use-toast';
+import { uploadFiles } from '@/lib/uploadthing';
+import { ArticleCreationRequest, ArticleValidator } from '@/lib/validators/article';
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
 
-import '@/styles/editor.css'
+import '@/styles/editor.css';
+import 'react-tagsinput/react-tagsinput.css'; // Make sure to import CSS for react-tagsinput
 
-type FormData = z.infer<typeof ArticleValidator>
+type FormData = z.infer<typeof ArticleValidator>;
 
 interface EditorProps {
   //subredditId: string
@@ -31,59 +33,55 @@ export const ArticleEditor: React.FC<EditorProps> = () => {
     defaultValues: {
       title: '',
       content: null,
+      tags: [],
       subredditId: null,
-
     },
-  })
-  const ref = useRef<EditorJS>()
-  const _titleRef = useRef<HTMLTextAreaElement>(null)
-  const router = useRouter()
-  const [isMounted, setIsMounted] = useState<boolean>(false)
-  const pathname = usePathname()
+  });
+
+  const [tags, setTags] = useState([]);
+  const ref = useRef<EditorJS>();
+  const _titleRef = useRef<HTMLTextAreaElement>(null);
+  const router = useRouter();
+  const [isMounted, setIsMounted] = useState<boolean>(false);
 
   const { mutate: createPost } = useMutation({
-    mutationFn: async ({
-      title,
-      content,
-
-    }: ArticleCreationRequest) => {
-      const payload: ArticleCreationRequest = { title, content }
-      const { data } = await axios.post('/api/article/create', payload)
-      return data
+    mutationFn: async (payload: ArticleCreationRequest) => {
+      const { data } = await axios.post('/api/article/create', payload);
+      return data;
     },
     onError: () => {
-      return toast({
+      toast({
         title: 'Something went wrong.',
         description: 'Your post was not published. Please try again.',
         variant: 'destructive',
       });
     },
     onSuccess: () => {
-      router.push('/');
+      router.push('/article');
       router.refresh();
-
-      return toast({
+      toast({
         description: 'Your post has been published.',
+        variant: 'default',
       });
     },
   });
 
   const initializeEditor = useCallback(async () => {
-    const EditorJS = (await import('@editorjs/editorjs')).default
-    const Header = (await import('@editorjs/header')).default
-    const Embed = (await import('@editorjs/embed')).default
-    const Table = (await import('@editorjs/table')).default
-    const List = (await import('@editorjs/list')).default
-    const Code = (await import('@editorjs/code')).default
-    const LinkTool = (await import('@editorjs/link')).default
-    const InlineCode = (await import('@editorjs/inline-code')).default
-    const ImageTool = (await import('@editorjs/image')).default
+    const EditorJS = (await import('@editorjs/editorjs')).default;
+    const Header = (await import('@editorjs/header')).default;
+    const Embed = (await import('@editorjs/embed')).default;
+    const Table = (await import('@editorjs/table')).default;
+    const List = (await import('@editorjs/list')).default;
+    const Code = (await import('@editorjs/code')).default;
+    const LinkTool = (await import('@editorjs/link')).default;
+    const InlineCode = (await import('@editorjs/inline-code')).default;
+    const ImageTool = (await import('@editorjs/image')).default;
 
     if (!ref.current) {
       const editor = new EditorJS({
         holder: 'editor',
         onReady() {
-          ref.current = editor
+          ref.current = editor;
         },
         placeholder: 'Type here to write your post...',
         inlineToolbar: true,
@@ -101,15 +99,13 @@ export const ArticleEditor: React.FC<EditorProps> = () => {
             config: {
               uploader: {
                 async uploadByFile(file: File) {
-                  // upload to uploadthing
-                  const [res] = await uploadFiles([file], 'imageUploader')
-
+                  const [res] = await uploadFiles([file], 'imageUploader');
                   return {
                     success: 1,
                     file: {
                       url: res.fileUrl,
                     },
-                  }
+                  };
                 },
               },
             },
@@ -120,82 +116,80 @@ export const ArticleEditor: React.FC<EditorProps> = () => {
           table: Table,
           embed: Embed,
         },
-      })
+      });
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (Object.keys(errors).length) {
       for (const [_key, value] of Object.entries(errors)) {
-        value
         toast({
           title: 'Something went wrong.',
-          description: (value as { message: string }).message,
+          description: value.message,
           variant: 'destructive',
-        })
+        });
       }
     }
-  }, [errors])
+  }, [errors]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setIsMounted(true)
+      setIsMounted(true);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     const init = async () => {
-      await initializeEditor()
-
+      await initializeEditor();
       setTimeout(() => {
-        _titleRef?.current?.focus()
-      }, 0)
-    }
+        _titleRef?.current?.focus();
+      }, 0);
+    };
 
     if (isMounted) {
-      init()
-
+      init();
       return () => {
-        ref.current?.destroy()
-        ref.current = undefined
-      }
+        ref.current?.destroy();
+        ref.current = undefined;
+      };
     }
-  }, [isMounted, initializeEditor])
+  }, [isMounted, initializeEditor]);
 
   async function onSubmit(data: FormData) {
-    const blocks = await ref.current?.save()
-  
+    const blocks = await ref.current?.save();
+
     const payload = {
       title: data.title,
       content: blocks,
-    }
-  
-    createPost(payload)
+      tags,  // Using state-managed tags
+    };
+
+    createPost(payload);
   }
 
   if (!isMounted) {
-    return null
+    return null;
   }
 
-  const { ref: titleRef, ...rest } = register('title')
+  const { ref: titleRef, ...rest } = register('title');
 
   return (
     <div className='w-full p-4 bg-zinc-50 rounded-lg border border-zinc-200'>
       <form
         id='subreddit-post-form'
-        className='w-fit'
+        className='w-full'
         onSubmit={handleSubmit(onSubmit)}>
         <div className='prose prose-stone dark:prose-invert'>
           <TextareaAutosize
             ref={(e) => {
-              titleRef(e)
-              // @ts-ignore
-              _titleRef.current = e
+              titleRef(e);
+              _titleRef.current = e;
             }}
             {...rest}
             placeholder='Title'
             className='w-full resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold focus:outline-none'
           />
+          <TagsInput value={tags} onChange={setTags} className='tag-input ' />
           <div id='editor' className='min-h-[500px]' />
           <p className='text-sm text-gray-500'>
             Use{' '}
@@ -207,7 +201,7 @@ export const ArticleEditor: React.FC<EditorProps> = () => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
 export default ArticleEditor;

@@ -60,7 +60,6 @@ export default function ArticleFeed() {
     loadMoreArticles();
     }
     }, [inView, loadMoreArticles]);
-
   return (
     <>
       <ArticleComponent  articles={articles} />

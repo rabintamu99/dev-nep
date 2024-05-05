@@ -6,8 +6,9 @@ import { z } from 'zod'
 export async function POST(req: Request) {
   try {
     const body = await req.json()
-    const { title, content } = ArticleValidator.parse(body)
+    const { title, content, tags } = ArticleValidator.parse(body)
 
+    console.log(body);
     const session = await getAuthSession();
     if (!session?.user) {
       return new Response('Unauthorized', { status: 401 });
@@ -22,6 +23,12 @@ export async function POST(req: Request) {
             connect: {
               id: session.user.id,
             },
+          },
+          tags: {
+            connectOrCreate: tags.map(tag => ({
+              where: { name: tag },
+              create: { name: tag }
+            }))
           },
         },
       });

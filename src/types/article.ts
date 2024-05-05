@@ -12,5 +12,6 @@ export type Article = {
     }
     authorId: string;
     likes_count: number;
+    tags: string[]; 
   };
   
