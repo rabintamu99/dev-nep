@@ -8,6 +8,7 @@ import { FC, useRef,useState,useEffect } from 'react'
 import EditorOutput from './EditorOutput'
 import PostVoteClient from './post-vote/PostVoteClient'
 import { UserAvatar } from './UserAvatar'
+import ShareButton from './ShareComponent'
 
 
 type PartialVote = Pick<Vote, 'type'>
@@ -60,7 +61,7 @@ const Post: FC<PostProps> = ({
         
             {subredditName ? (
               <>
-               <span>Posted in </span>
+               <span className='text-sm font-semibold text-zinc-500 dark:text-white dark:bg-slate-800'>Posted in </span>
                 <a
                   className=' text-zinc-900 dark:text-white dark:bg-slate-800 text-sm underline-offset-2'
                   href={`/c/${subredditName}`}>
@@ -106,11 +107,11 @@ const Post: FC<PostProps> = ({
           <MessagesSquare className='h-4 w-4' /> {commentAmt} comments
         </Link>
     </div>
-        {/* <ShareButton
+        <ShareButton
                 title={post.title}
                 text={String(post.content)}  
                 url={fullUrl}
-            /> */}
+            />
       </div>
     </div>
   )

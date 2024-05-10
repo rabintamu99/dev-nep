@@ -34,7 +34,7 @@ return (
           <div className='flex items-center justify-between px-4'>
         <div>
           <a href={`/article/${article.id}`}>
-            <h1 className='text-xl font-semibold py-4 px-4 leading-6 text-gray-600 dark:text-white'>
+            <h1 className='text-xl font-semibold pt-4 px-4 leading-6 text-gray-600 dark:text-white'>
               {article.title}
             </h1>
           </a>
@@ -44,10 +44,10 @@ return (
             <SaveComponent />
         </div>  
       </div>
-      <div className="px-6">
+      <div className="px-6 pt-2">
       {article.tags?.map(tag => <Tag key={tag} tag={tag} />)}
      </div>
-        <CardHeader className='flex px-4 py-2'>
+        <CardHeader className='flex px-4'>
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <div>
@@ -65,7 +65,7 @@ return (
           </div>
         </div>
       </CardHeader>
-      <CardContent className='relative text-sm max-h-40 w-full overflow-clip my-6'>
+      <CardContent className='relative text-sm max-h-40 w-full overflow-clip'>
         <a href={`/article/${article.id}`}>
           <EditorOutput content={article.content} />
         </a>

@@ -189,7 +189,7 @@ export const ArticleEditor: React.FC<EditorProps> = () => {
             placeholder='Title'
             className='w-full resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold focus:outline-none'
           />
-          <TagsInput value={tags} onChange={setTags} className='tag-input ' />
+          <TagsInput value={tags} onChange={setTags} className='tag-input w-full h-16 ' />
           <div id='editor' className='min-h-[500px]' />
           <p className='text-sm text-gray-500'>
             Use{' '}

@@ -12,13 +12,13 @@ const Navbar = async () => {
   const session = await getServerSession(authOptions);
   return (
     <div className='fixed top-0 inset-x-0 bg-zinc-100 dark:bg-slate-800 border-b border-zinc-300 z-[50] py-2'>
-     <div className='container max-w-7xl h-full mx-auto flex items-center justify-between px-'>
+     <div className='container max-w-7xl h-full mx-auto flex items-center justify-between'>
         {/* Logo and toggle menu button */}
         <div className='flex items-center'>
           <Button className='md:hidden mr-2' aria-label='Menu' variant={'outline'} >
             <MenuIcon className='h-6 w-6' />
           </Button>
-          <Link href='/' className='flex gap-2 items-center'>
+          <Link href='/' className='flex gap-1 items-center'>
             <Icons.logo className='h-8 w-8 sm:h-6 sm:w-6' />
             <span className='hidden md:block text-zinc-800 text-xl font-bold'>NEP.DEV</span>
           </Link>
@@ -33,13 +33,13 @@ const Navbar = async () => {
     </div>
 
         {/* Right section with conditional display */}
-        <div className='flex gap-6 items-center'>
+        <div className='flex gap-3 items-center'>
           <Link href='/article/create' className='md:flex hover:bg-zinc-200 hover:rounded-full p-1 '>
             <PenBoxIcon className='h-6 w-6 mr-1 ' /> <span>write</span>
           </Link>
-          <div className='hidden md:flex gap-6 items-center'>
+          <div className='hidden md:flex gap-4 items-center'>
             <BellIcon className='h-8 w-8 hover:bg-zinc-200 hover:rounded-full p-1' />
-            <ModeToggle />
+            <ModeToggle  />
             {/* Conditional rendering based on session */}
             {session?.user ? (
               <UserAccountNav user={session.user} />
