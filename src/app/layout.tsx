@@ -33,7 +33,7 @@ export default function RootLayout({
       <body className='min-h-screen  max-w-8xl pt-8 bg-slate-50 dark:bg-zinc-950 antialiased'>
       <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="light"
             enableSystem
             disableTransitionOnChange
           >
@@ -48,10 +48,9 @@ export default function RootLayout({
           <Footer />
           </Providers>
           </ThemeProvider>
-      
+
         <Toaster />
       </body>
-     
     </html>
   )
 }

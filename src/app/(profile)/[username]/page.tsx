@@ -32,6 +32,25 @@ export default async function profilePage({
     }
   });
 
+  const totalArticles = await db.article.count({
+    where: { author: { username: username } }
+  });
+
+  const totalFollowers = await db.user.count({
+    where: { following: { some: { followerId: user?.id } } }
+  });
+
+  const totalSubscriptions = await db.user.count({
+    where: { id: user?.id }
+  });
+
+  const totalLikes = await db.like.count({
+    where: {
+      article: {
+        authorId: user?.id,
+      }
+    }
+  });
 
 return (
   <>
@@ -91,9 +110,9 @@ return (
           </div>
 
     {/* Badges for WorkedWith, Followers, and Following */}
-    <div className="flex mt-4 items-center  space-x-6">
-          <p className="text-l font-bold">13 <span className="text-sm text-zinc-500 font-semibold">Circle</span></p>
-          <p className="text-l font-bold">3 <span className="text-sm text-zinc-500 font-semibold">Followers</span></p>
+    <div className="flex mt-4 items-center gap-1 space-x-6">
+          <p className="text-l font-bold">{totalSubscriptions} <span className="text-sm text-zinc-500 font-semibold">Circle</span></p>
+          <p className="text-l font-bold">{totalFollowers} <span className="text-sm text-zinc-500 font-semibold">Followers</span></p>
         </div>
 
     {/* Skill Tags */}
@@ -105,26 +124,28 @@ return (
     </div>
     {/* User's Activity Stats */}
     <div className="grid grid-cols-4 gap-2 mt-6">
-      {/* Dynamic Content for Activity Stats */}
-      <div className="flex items-cente text-center gap-2">
-        <p className="font-bold">{}</p>
-        <p className="text-l text-gray-500 font-bold">Article</p>
-        <p className="text-l text-gray-500 font-bold ">3</p>
-      </div>
-      <div className="flex items-cente text-center gap-2">
-        <p className="font-bold">{}</p>
-        <p className="text-l text-gray-500 font-bold">Likes</p>
-        <p className="text-l text-gray-500 font-bold ">3</p>
-      </div>
-      <div className="flex items-cente text-center gap-2">
-        <p className="font-bold">{}</p>
-        <p className="text-l text-gray-500 font-bold">Saved</p>
-        <p className="text-l text-gray-500 font-bold ">3</p>
-      </div>
-   
-      {/* More Stats */}
-      {/* ... */}
-    </div>
+  {/* Menu-like Items for Activity Stats */}
+  <div className="flex items-center justify-center gap-2 cursor-pointer hover:bg-gray-100 p-2 rounded-md">
+    <p className="font-bold">{/* Icon or Count Here */}</p>
+    <p className="text-l text-gray-500 font-bold">Article</p>
+    <p className="text-l text-gray-500 font-bold ">{totalArticles}</p>
+  </div>
+
+  <div className="flex items-center justify-center gap-2 cursor-pointer hover:bg-gray-100 p-2 rounded-md">
+    <p className="font-bold">{/* Icon or Count Here */}</p>
+    <p className="text-l text-gray-500 font-bold">Likes</p>
+    <p className="text-l text-gray-500 font-bold ">{totalLikes}</p>
+  </div>
+
+  <div className="flex items-center justify-center gap-2 cursor-pointer hover:bg-gray-100 p-2 rounded-md">
+    <p className="font-bold">{/* Icon or Count Here */}</p>
+    <p className="text-l text-gray-500 font-bold">Saved</p>
+    <p className="text-l text-gray-500 font-bold ">3</p>
+  </div>
+
+  {/* More Menu-like Stats */}
+  {/* ... */}
+</div>
   </div>
   <div className="pt-5">
   <ArticleComponent key={articles.id} articles={articles} />
@@ -134,10 +155,10 @@ return (
 {/* Right Sidebar */}
 <div className='md:col-span-2'>
 
- 
+{/*  
  <MyCommunities />
  
- <TopUser />
+ <TopUser /> */}
   
 </div>
 </div>

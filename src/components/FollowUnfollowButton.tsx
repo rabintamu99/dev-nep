@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button } from '@/components/ui/Button';
 import { useSession } from 'next-auth/react';
+import { Loader } from './Loader';
+import { Loader2 } from 'lucide-react';
 
 interface FollowUnfollowButtonProps {
   targetUserId?: string;
@@ -50,7 +52,7 @@ const FollowUnfollowButton: React.FC<FollowUnfollowButtonProps> = ({ targetUserI
   };
 
   if (loading) {
-    return <Button disabled>Loading...</Button>;
+    return <Loader2 className='w-6 h-6 text-zinc-500 animate-spin' />;
   }
 
   if (!session) {
@@ -58,7 +60,7 @@ const FollowUnfollowButton: React.FC<FollowUnfollowButtonProps> = ({ targetUserI
   }
 
   return (
-    <Button className='p-2' variant={'outline'} onClick={isFollowing ? handleUnfollow : handleFollow}>
+    <Button className='p-2 h-auto w-auto rounded-full' variant={'outline'} onClick={isFollowing ? handleUnfollow : handleFollow}>
       {isFollowing ? 'Unfollow' : 'Follow'}
     </Button>
   );

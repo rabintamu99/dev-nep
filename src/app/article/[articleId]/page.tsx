@@ -26,8 +26,10 @@ export default async function ArticlePage({
       },
     });
 
-      // Formatting the date
-  const formattedDate = format(new Date(article.createdAt), 'yyyy MMMM dd');
+    
+     // Ensuring article exists and formatting the date
+const formattedDate = article ? format(new Date(article.createdAt), 'yyyy MMMM dd') : 'Date unavailable';
+
 
 
   return (
