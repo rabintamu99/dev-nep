@@ -110,7 +110,7 @@ const PostComment: FC<PostCommentProps> = ({
 
       {isReplying ? (
         <div className='grid w-full gap-1.5'>
-          <Label htmlFor='comment'>Your comment</Label>
+          <Label htmlFor='comment' className='xl'>Share Your Brilliant Thoughts</Label>
           <div className='mt-2'>
             <Textarea
               onFocus={(e) =>

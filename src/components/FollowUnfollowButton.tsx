@@ -60,9 +60,16 @@ const FollowUnfollowButton: React.FC<FollowUnfollowButtonProps> = ({ targetUserI
   }
 
   return (
-    <Button className='p-2 h-auto w-auto rounded-full' variant={'outline'} onClick={isFollowing ? handleUnfollow : handleFollow}>
-      {isFollowing ? 'Unfollow' : 'Follow'}
-    </Button>
+    <button
+    className={`px-4 py-2 rounded-full border-2 text-sm font-medium transition-all duration-200 ${
+      isFollowing ? 'bg-zinc-500 text-white border-zinc-500' : 'bg-transparent border-zinc-600 text-zinc-600 hover:bg-zinc-600 hover:text-white'
+    }`}
+    onClick={isFollowing ? handleUnfollow : handleFollow}
+  >
+    {isFollowing ? 'Following' : '+ Follow'}
+  </button>
+  
+  
   );
 };
 
