@@ -4,16 +4,10 @@ import {
   HomeIcon,
   CalendarCheck2Icon,
   PenBoxIcon,
-  User2Icon,
   Settings2Icon,
-  UserCircle2Icon,
-  Users2Icon,
-  BellElectricIcon,
-  BellIcon,
   FileIcon,
   PlusSquareIcon,
-  TrendingUpIcon,
-  MessageCircleQuestionIcon,
+
 } from "lucide-react";
 import SidebarItem from "./item";
 
@@ -62,7 +56,7 @@ const items: ISidebarItem[] = [
   },
   {
     name: "Create Circle",
-    path: "/r/create",
+    path: "/c/create",
     icon: PlusSquareIcon,
   },
   {

@@ -9,7 +9,7 @@ import axios, { AxiosError } from 'axios'
 import { useEffect, useState } from 'react'
 import { toast } from '../../hooks/use-toast'
 import { Button } from '../ui/Button'
-import { ArrowBigDown, ArrowBigUp, HeartIcon } from 'lucide-react'
+import { HeartIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 interface PostVoteClientProps {
@@ -78,7 +78,7 @@ const PostVoteClient = ({
   })
 
   return (
-    <div className='flex flex-col gap-4 sm:gap-0 pr-6 sm:w-20 pb-4 sm:pb-0'>
+    <div className='flex items-center gap-1 sm:gap-1 sm:pb-0'>
       {/* upvote */}
       <Button
         onClick={() => vote('UP')}

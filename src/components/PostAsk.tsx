@@ -2,12 +2,9 @@
 
 import { addQuestion } from '@/actions/actions';
 import { useRef } from "react";
-import { UserAvatar } from './UserAvatar'
 import { Button } from '@/components/ui/Button'
 import { Label } from '@/components/ui/Label'
 import { Input } from '@/components/ui/Input'
-import { Textarea } from '@/components/ui/Textarea'
-import { getAuthSession } from '@/lib/auth'
 import { PlusIcon } from 'lucide-react';
 
 

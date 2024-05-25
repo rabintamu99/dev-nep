@@ -64,7 +64,7 @@ const SearchBar: FC<SearchBarProps> = ({}) => {
   return (
     <Command
       ref={commandRef}
-      className='relative rounded-full border max-w-lg z-50 overflow-visible'>
+      className='relative rounded-full border-2  max-w-xl z-50 overflow-visible'>
       <CommandInput
         isLoading={isFetching}
         onValueChange={(text) => {
@@ -72,25 +72,25 @@ const SearchBar: FC<SearchBarProps> = ({}) => {
           debounceRequest()
         }}
         value={input}
-        className='outline-none border-none focus:border-none focus:outline-none ring-0'
-        placeholder='Search communities...'
+        className='outline-none border-none border-b-0 focus:border-none focus:outline-none ring-0'
+        placeholder='Search Circles...'
       />
 
       {input.length > 0 && (
         <CommandList className='absolute bg-white top-full inset-x-0 shadow rounded-b-md'>
           {isFetched && <CommandEmpty>No results found.</CommandEmpty>}
           {(queryResults?.length ?? 0) > 0 ? (
-            <CommandGroup heading='Communities'>
+            <CommandGroup heading='Circles'>
               {queryResults?.map((subreddit) => (
                 <CommandItem
                   onSelect={(e) => {
-                    router.push(`/r/${e}`)
+                    router.push(`/c/${e}`)
                     router.refresh()
                   }}
                   key={subreddit.id}
                   value={subreddit.name}>
                   <Users className='mr-2 h-4 w-4' />
-                  <a href={`/r/${subreddit.name}`}>r/{subreddit.name}</a>
+                  <a href={`/c/${subreddit.name}`}>{subreddit.name}</a>
                 </CommandItem>
               ))}
             </CommandGroup>

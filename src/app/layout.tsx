@@ -25,15 +25,15 @@ export default function RootLayout({
     <html
       lang='en'
       className={cn(
-        'bg-white dark:bg-black text-slate-900 antialiased light',
+        'bg-white  text-slate-900 antialiased light',
         inter.className
       )}>
         
         
-      <body className='min-h-screen  max-w-8xl pt-8 bg-slate-50 dark:bg-slate-800 antialiased'>
+      <body className='min-h-screen  max-w-8xl pt-8 bg-slate-50 dark:bg-zinc-950 antialiased'>
       <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="light"
             enableSystem
             disableTransitionOnChange
           >
@@ -48,10 +48,9 @@ export default function RootLayout({
           <Footer />
           </Providers>
           </ThemeProvider>
-      
+
         <Toaster />
       </body>
-     
     </html>
   )
 }

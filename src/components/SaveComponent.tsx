@@ -1,39 +1,8 @@
-// "use client";
-
-// import React, { useState, useEffect } from "react";
-// import {BookmarkIcon, HeartIcon} from "lucide-react";
-
-// export default function save() {
-//   const [isLiked, setIsLiked] = useState(false);
-//   const [count, setCount] = useState(0);
-//   const toggleLike = (type: number) => {
-//     if (type === 1) {
-//       setIsLiked(true);
-//       setCount(count + 1);
-//     } else {
-//       setIsLiked(false);
-//       setCount(count - 1);
-//     }
-//   };
-
-//   return (
-//     <div className="flex gap-2 items-center">
-//       {isLiked ? (
-//        <BookmarkIcon onClick={() => toggleLike(0)} className="text-red-500 fill-red-500 " />
-
-//       ): (<BookmarkIcon onClick={() => toggleLike(1)} className="cursor-pointer" />
-
-//     )}
-//     <p>{count}</p>
-
-//     </div>
-//   )
-// };
 
 
 'use client'
 import axios from 'axios'
-import { BookmarkCheckIcon, BookmarkIcon, StarIcon } from 'lucide-react'
+import {  BookmarkIcon } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 
 type Props = {

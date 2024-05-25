@@ -7,16 +7,16 @@ import { FC } from 'react'
 import { Button } from '@/components/ui/Button'
 import { useToast } from '@/hooks/use-toast'
 import { Icons } from './Icons'
-import { GithubIcon } from 'lucide-react'
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
   const { toast } = useToast()
-  const [isLoading, setIsLoading] = React.useState<boolean>(false)
+  const [isGoogleLoading, setIsGoogleLoading] = React.useState<boolean>(false)
+  const [isGithubLoading, setIsGithubLoading] = React.useState<boolean>(false)
 
   const loginWithGoogle = async () => {
-    setIsLoading(true)
+    setIsGoogleLoading(true)
 
     try {
       await signIn('google')
@@ -27,12 +27,12 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
         variant: 'destructive',
       })
     } finally {
-      setIsLoading(false)
+      setIsGoogleLoading(false)
     }
   }
 
   const loginWithGithub = async () => {
-    setIsLoading(true)
+    setIsGithubLoading(true)
 
     try {
       await signIn('github')
@@ -43,31 +43,31 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
         variant: 'destructive',
       })
     } finally {
-      setIsLoading(false)
+      setIsGithubLoading(false)
     }
   }
 
   return (
-    <div className={cn('flex flex-col justify-center ', className)} {...props}>
+    <div className={cn('flex flex-col justify-center', className)} {...props}>
       <Button
-        isLoading={isLoading}
+        isLoading={isGoogleLoading}
         type='button'
         size='sm'
         className='w-full'
         onClick={loginWithGoogle}
-        disabled={isLoading}>
-        {isLoading ? null : <Icons.google className='h-4 w-4 mr-2' />}
+        disabled={isGoogleLoading || isGithubLoading}>
+        {isGoogleLoading ? null : <Icons.google className='h-4 w-4 mr-2' />}
         Continue With Google
       </Button>
 
       <Button
-        isLoading={isLoading}
+        isLoading={isGithubLoading}
         type='button'
         size='default'
         className='w-full my-2 outline'
         onClick={loginWithGithub}
-        disabled={isLoading}>
-        {isLoading ? null : <GithubIcon className='h-4 w-4 mr-2' />}
+        disabled={isGoogleLoading || isGithubLoading}>
+        {isGithubLoading ? null : <Icons.github className='h-4 w-4 mr-2' />}
         Continue With Github
       </Button>
     </div>

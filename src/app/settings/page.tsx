@@ -3,7 +3,6 @@ import SidebarNav  from '@/components/setting/SidebarNav'
 import { UserNameForm } from '@/components/UserNameForm'
 import { authOptions, getAuthSession } from '@/lib/auth'
 import { UserAvatar } from '@/components/UserAvatar'
-import { Button } from '@/components/ui/Button'
 
 
 export const metadata = {

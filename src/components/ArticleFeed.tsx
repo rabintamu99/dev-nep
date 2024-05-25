@@ -1,90 +1,76 @@
+"use client";
 
-import { db } from '@/lib/db';
-import { formatTimeToNow } from '@/lib/utils';
-import {  MessageCircle, MessageCircleIcon, MessageSquareIcon, MessagesSquare, ReplyIcon, ShareIcon } from 'lucide-react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/Card';
-import { UserAvatar } from './UserAvatar';
-import LikeComponent from './LikeComponent';
-import SaveComponent from './SaveComponent';
-import EditorOutput from './EditorOutput';
-import ShareComponent from './ShareComponent';
+import { useCallback, useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
+import { Loader } from "@/components/Loader";
+import { fetchArticles } from "@/actions/fetchArticles";
+import ArticleComponent from "@/components/Article";
+import { Article } from "@/types/article";
+import { Skeleton } from "./ui/skeleton";
 
-const Page = async () => {
-    const article = await db.article.findMany({
-      orderBy: {
-        createdAt: 'desc' // assuming 'createdAt' is the field you want to sort by
-      },
-      include: {
-        author: true,
-        likes: true,
-      },
-    });
-  return (
-   <div className="max-w-2xl mx-auto  rounded-lg">
- {article.map((article) => (
-<Card className='p-3 mb-3'>
-<div className='flex items-center justify-between px-6 '>
-  <div>
-  <a href={`/article/${article.id}`}>
-            <h1 className='text-xl font-semibold py-4 leading-6 text-gray-600 dark:text-white'>
-              {article.title}
-            </h1>
-          </a>
-  </div>
-  <div>
-      {/* @ts-expect-error server component */}
-        <SaveComponent />
-       </div>  
-    </div>
-   
-<CardHeader className='flex  px-4 py-2'>
+export default function ArticleFeed() {
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [page, setPage] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
 
-  <div className="flex items-center justify-between ">
+  const { ref, inView } = useInView({
+    delay: 500,
+  });
+
+  const [loadingLock, setLoadingLock] = useState(false);
+
+  const loadMoreArticles = useCallback(async () => {
+    if (!hasMore || isLoading || loadingLock) return;
   
+    setLoadingLock(true);
+    setIsLoading(true);
+  
+    try {
+      const nextPage = page + 1;
+      const newArticles = await fetchArticles(nextPage);
+  
+      if (!newArticles || newArticles.length === 0) {
+        setHasMore(false);
+      } else {
+        // Filter out any duplicates from the newArticles array
+        const uniqueNewArticles = newArticles.filter(
+          (article) =>
+            !articles.some((existingArticle) => existingArticle.id === article.id)
+        );
+  
+        // If there are unique new articles, update the articles state
+        if (uniqueNewArticles.length > 0) {
+          setArticles((prevArticles) => [...prevArticles, ...uniqueNewArticles]);
+          setPage(nextPage);
+        } else {
+          setHasMore(false);
+        }
+      }
+    } catch (error) {
+      console.error('Failed to load articles:', error);
+      setHasMore(false);
+    } finally {
+      setIsLoading(false);
+      setLoadingLock(false);
+    }
+  }, [page, hasMore, isLoading, loadingLock, articles]);
 
-  <div className="flex items-center">
- 
-        <div>
-            <UserAvatar
-                user={{ name: article.author.name || 'Unnamed User', image: article.author.image || '/default-avatar.png' }}
-                className='h-8 w-8 mx-2'
-            />
-            </div>
-            <div>
-                <CardTitle className='text-sm'>{article.author.name} <span className='text-zinc-500 text-sm'>@{article.author.username}</span></CardTitle>
-                <CardDescription className='text-sm'>posted {formatTimeToNow(article.createdAt)}</CardDescription>
-            </div>
-        </div>
-        <div className='flex items-center'>
-
-       </div>   
-  </div>
-      
-    </CardHeader>
-  <CardContent className='relative text-sm max-h-40 w-full overflow-clip my-6' >
-  <a href={`/article/${article.id}`}>
-  <EditorOutput content={article.content} />
-    </a>
-  </CardContent>
-  <CardFooter className='flex items-center justify-between mt-8 border-t-2 border-zinc-100 pb-0'>
-   
-    <div className='flex gap-4 items-center mt-2 '>
-    
-      <LikeComponent articleId={article.id} initialCount={article.likes_count} />
-      <div className='flex gap-1 items-center'><MessagesSquare className='h-4 w-4'/><p>comment</p></div>
-    </div>
-    <div className='flex gap-4 items-center mt-2'>
-      {/* @ts-expect-error server component */}
-     <ShareComponent />
-    </div>
-
-  </CardFooter>
-</Card>
-
-  ))}
-</div>
-
+  useEffect(() => {
+    if (inView && !isLoading && !loadingLock) {
+    loadMoreArticles();
+    }
+    }, [inView, loadMoreArticles]);
+  return (
+    <>
+      <ArticleComponent  articles={articles} />
+      <div
+        className="flex justify-center items-center p-4 col-span-1 sm:col-span-2 md:col-span-3"
+        ref={ref}
+      >
+        {isLoading ? <Loader />
+ : !hasMore && "Nothing more to load"}
+      </div>
+    </>
   );
-};
-
-export default Page;
+}

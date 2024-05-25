@@ -137,7 +137,6 @@ const LikeComponent: React.FC<LikeButtonProps> = ({ articleId, initialCount }) =
         localStorage.setItem(`liked-${articleId}`, JSON.stringify(!newLikedState));
       }
     } catch (error) {
-      console.error("Error toggling like:", error);
       // Revert the like state and count in case of an error
       setLiked(!newLikedState);
       setLikesCount(likesCount);
@@ -148,7 +147,7 @@ const LikeComponent: React.FC<LikeButtonProps> = ({ articleId, initialCount }) =
   return (
     <div className="flex items-center gap-1">
       <button onClick={toggleLike}>
-        <HeartIcon className={`cursor-pointer ${liked ? 'text-red-500 fill-current' : ''}h-5 w-5 `} />
+       <HeartIcon className={`cursor-pointer h-5 w-5 ${liked ? 'text-red-500 fill-current' : ''}`} />
       </button>
       <p>{likesCount}</p>
     </div>

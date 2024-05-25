@@ -2,11 +2,9 @@
 import { UserAvatar } from "@/components/UserAvatar";
 import { Badge } from "@/components/ui/badge"
 import getUser from "@/lib/getUser";
-import { CalendarIcon, CheckCircle2Icon, CircleDashed, ClockIcon, ExternalLinkIcon, GithubIcon, LinkedinIcon, LocateIcon, LucideGithub, MapPinIcon, PlayIcon, SmileIcon, TicketCheckIcon, TwitterIcon, XIcon } from "lucide-react";
-
-import { getAuthSession } from '@/lib/auth';
+import { CalendarIcon, ClockIcon, ExternalLinkIcon, LinkedinIcon, LucideGithub, MapPinIcon, XIcon } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import Sidebar from "@/components/Sidebar";
+
 
 
 export default async function profilePage({

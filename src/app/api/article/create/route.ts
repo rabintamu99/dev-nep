@@ -6,8 +6,9 @@ import { z } from 'zod'
 export async function POST(req: Request) {
   try {
     const body = await req.json()
-    const { title, content } = ArticleValidator.parse(body)
+    const { title, content, tags } = ArticleValidator.parse(body)
 
+    console.log(body);
     const session = await getAuthSession();
     if (!session?.user) {
       return new Response('Unauthorized', { status: 401 });
@@ -23,20 +24,24 @@ export async function POST(req: Request) {
               id: session.user.id,
             },
           },
+          tags: {
+            connectOrCreate: tags.map(tag => ({
+              where: { name: tag },
+              create: { name: tag }
+            }))
+          },
         },
       });
-      console.log('Created post:', createdPost);
+      
       return new Response(JSON.stringify(createdPost), { status: 201, headers: { 'Content-Type': 'application/json' } });
     } catch (error) {
-      console.error('Error creating post:', error);
+
       return new Response('Error creating post', { status: 500 });
     }
   } catch (error) {
     if (error instanceof z.ZodError) {
       return new Response(error.message, { status: 400 });
     }
-
-    console.error('Server error:', error);
     return new Response('Could not post this time. Please try later', { status: 500 });
   }
 }

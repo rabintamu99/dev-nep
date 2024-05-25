@@ -17,7 +17,7 @@ export async function PATCH(req: Request) {
   try {
     const { articleId } = ArticleLikeValidator.parse(body);
 
-    console.log(articleId);
+
     // Check if the user has already liked the article
     const existingLike = await db.like.findFirst({
       where: {
