@@ -1,7 +1,6 @@
 'use client'
-
 import Link from 'next/link'
-import { User } from 'next-auth'
+import { User as NextAuthUser } from 'next-auth'
 import { signOut } from 'next-auth/react'
 
 import {
@@ -13,11 +12,16 @@ import {
 } from '@/components/ui/DropdownMenu'
 import { UserAvatar } from '@/components/UserAvatar'
 
+interface User extends NextAuthUser {
+  username?: string
+}
+
 interface UserAccountNavProps extends React.HTMLAttributes<HTMLDivElement> {
-  user: Pick<User, 'name' | 'image' | 'email'>
+  user: Pick<User, 'name' | 'image' | 'email' | 'username'>
 }
 
 export function UserAccountNav({ user }: UserAccountNavProps) {
+  
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -41,7 +45,9 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
         <DropdownMenuItem asChild>
           <Link href='/'>Feed</Link>
         </DropdownMenuItem>
-
+        <DropdownMenuItem asChild>
+          <Link href={`/${user.username}`}>Profile</Link>
+        </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link href='/r/create'>Create Circle</Link>
         </DropdownMenuItem>

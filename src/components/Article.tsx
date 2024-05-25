@@ -30,7 +30,7 @@ export default function ArticleComponent({ articles }: ArticleProps) {
     <>
       {articles && Array.isArray(articles) && articles.length > 0 ? (
         articles.map((article) => (
-          <Card key={article.id} className='mb-1'>
+          <Card key={article.id} className='mb-2'>
             <div className='flex items-center justify-between px-4'>
               <div>
                 <a href={`/article/${article.id}`}>
@@ -40,7 +40,7 @@ export default function ArticleComponent({ articles }: ArticleProps) {
                 </a>
               </div>
             
-              <div>
+              <div className='px-1'>
                 {/* @ts-expect-error server component */}
                 <SaveComponent />
               </div>
@@ -69,11 +69,11 @@ export default function ArticleComponent({ articles }: ArticleProps) {
             </CardHeader>
             <CardContent className='relative text-sm max-h-40 w-full overflow-clip' ref={pRef}>
               <a href={`/article/${article.id}`}>
-              <EditorOutput content={article.content} />
-            {pRef.current?.clientHeight === 160 ? (
-              // blur bottom if content is too long
-              <div className='absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-white to-transparent dark:from-black'></div>
-            ) : null}
+                <EditorOutput content={article.content} />
+                {pRef.current?.clientHeight === 160 ? (
+                  // blur bottom if content is too long
+                  <div className='absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-white to-transparent dark:from-black'></div>
+                ) : null}
               </a>
             </CardContent>
             <CardFooter className='flex items-center justify-between mt-8 border-t-2 border-zinc-100 pb-2'>
@@ -81,7 +81,7 @@ export default function ArticleComponent({ articles }: ArticleProps) {
                 <LikeComponent articleId={article.id} initialCount={article.likes_count} />
                 <div className='flex gap-1 items-center'><MessagesSquare className='h-4 w-4'/><p>comment</p></div>
               </div>
-              <div className='flex gap-4 items-center mt-2'>
+              <div className='flex  items-center mt-2 '>
                 {/* @ts-expect-error server component */}
                 <ShareComponent />
               </div>
